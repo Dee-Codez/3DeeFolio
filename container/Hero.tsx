@@ -1,6 +1,6 @@
 "use client"
 
-import { HeroText } from "@/components/heroText";
+import { HeroText } from "@/components/HeroText";
 
 function Hero() {
   

@@ -7,7 +7,7 @@ function HeroText() {
         <div>
             <div>
                 <p className="text-6xl font-bold">
-                    Debam Pati
+                    D
                 </p>
             </div>
         </div>
