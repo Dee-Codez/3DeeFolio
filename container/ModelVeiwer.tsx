@@ -42,8 +42,7 @@ function AnimatedLetter({ char, index, nscale }) {
         scale={nscale}
       >
         {char}
-        <meshBasicMaterial color={"#abb2bf"} />
-        <meshNormalMaterial />
+        <meshLambertMaterial color={"#55E2E9"} />
       </Text3D>
     </animated.group>
   );
@@ -134,7 +133,7 @@ function InnerComponent() {
     <>
     
     <animated.mesh ref={textRef} {...springProps}>
-    <Html transform scale={0.5} position={[1.2, 3.5, 0]} >
+    <Html transform scale={0.3} position={[1.4, 3.5, 0]} >
       <TextTyper/>
     </Html>
       <Text color="white" position={[1.3, 1, 0.5]} scale={scale}  anchorX="center" anchorY="middle">
@@ -182,7 +181,7 @@ function TextRing({ children ,nscale}) {
   const texts = children.split('\n');
 
   const canvas = useMemo(() => {
-    return ccccc(texts, "white");
+    return ccccc(texts, "#0496C7");
   }, [children]);
 
   const backCanvas = useMemo(() => {
@@ -268,8 +267,8 @@ function ModelViewer() {
   return (
     <div className="h-[100vh] w-full relative">
       <Canvas style={{ width: '100vw', height: '100vh' }} camera={{ position: [0, 0, 5] }}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[0, 10, 0]} intensity={1.5} />
+      <ambientLight intensity={0.2} />
+      <directionalLight position={[0, 10, 4]} intensity={3} />
         <Suspense fallback={<Loader />}>
           <Plane args={[100, 100]} position={[0, 0, -10]}>
             <meshBasicMaterial attach="material" map={gradientTexture} depthTest={false} />

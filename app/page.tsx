@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Hero } from "@/container/Hero";
 import dynamic from 'next/dynamic';
 import { AboutPage } from "@/container/AboutPage";
+import AnimatedCursor from "react-animated-cursor"
+import { LandingPage } from "@/container/LandingPage";
 
 export default function Home() {
 
@@ -9,10 +11,20 @@ export default function Home() {
     () => import('@/container/ModelVeiwer'),
     { ssr: false }
   );
+  
   return (
-    <main className="flex flex-col items-center justify-between">
-      <Hero />
-      <ModelViewer />
+    <main className="flex flex-col items-center ">
+      {/* <AnimatedCursor
+        color="255, 255, 255"
+        innerSize={16}
+        outerSize={60}
+        outerScale={3}
+        innerScale={2}
+        outerStyle={{
+          mixBlendMode: 'soft-light',
+        }}
+      /> */}
+      <LandingPage/>
       <AboutPage/>
     </main>
   );
