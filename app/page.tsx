@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import { AboutPage } from "@/container/AboutPage";
 import AnimatedCursor from "react-animated-cursor"
 import { LandingPage } from "@/container/LandingPage";
+import { TimelinePage } from "@/container/TimelinePage";
+import { ProjectPage } from "@/container/ProjectPage";
 
 export default function Home() {
 
@@ -25,7 +27,10 @@ export default function Home() {
         }}
       /> */}
       <LandingPage/>
+      <div></div>
       <AboutPage/>
+      <div></div>
+      <ProjectPage/>
     </main>
   );
 }
