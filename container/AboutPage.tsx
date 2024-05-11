@@ -13,6 +13,7 @@ function AboutPage() {
   const bgGradient = "linear-gradient(to right, #00032a, #00043f, #00032a)";
   const headingRef = useRef(null);
   const gradRef = useRef(null);
+  const btmRef = useRef(null);
   
   useEffect(() => {
 
@@ -38,31 +39,20 @@ function AboutPage() {
       }
     }
   );
+  if (window.innerWidth > 1280 ) { // Only enable the scroll animation if the width of the viewport is greater than 768 pixels
+    gsap.to(window, {
+      scrollTrigger: {
+        trigger: "#btm", // ID of the container that triggers the scroll
+        start: "top bottom",
+        end: "top top",
+        onEnter: () => gsap.to(window, { scrollTo: btmRef.current, duration: 1 }), // Scroll to the desired container
+        scrub: true
+      }
+    });
+  }
   }, [])
 
-  useEffect(() => {
-    let lastScrollTop = 0;
-  
-    const handleScroll = () => {
-      const btm = document.getElementById('btm');
-      if (btm && window.innerWidth > 1280) {
-        const rect = btm.getBoundingClientRect();
-        const st = window.pageYOffset || document.documentElement.scrollTop;
-  
-        if (rect.bottom <= window.innerHeight && st > lastScrollTop) {
-          btm.scrollIntoView({ behavior: 'smooth' });
-        }
-  
-        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-      }
-    };
-  
-    window.addEventListener('scroll', handleScroll);
-  
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+
   
 
   return (
@@ -193,6 +183,7 @@ function AboutPage() {
                         <ModernImage src='/icons/tailwind.png' alt="Tailwind" txtcn='text-black text-lg' width={75} height={75} />
                         <ModernImage src='/icons/bs.webp' alt="Bootstrap" width={75} height={75} />
                         <ModernImage src='/icons/sass.png' alt="Sass" width={75} height={75} />
+                        <ModernImage src='/icons/gsap.svg' alt="GSAP" txtcn='text-black text-lg' width={75} height={75} />
                         <ModernImage src='/icons/canva.webp' alt="Canva" width={75} height={75} />
                         <ModernImage src='/icons/figma.webp' alt="Figma" width={75} height={75} />
                         <ModernImage src='/icons/ps.webp' alt="Photoshop" width={75} height={75} />
@@ -207,7 +198,7 @@ function AboutPage() {
             <p className='text-2xl text-center mt-20 xl:mt-40 pb-14'>That is it for my skillset. Scroll down for more details on my projects.</p>
         </div>
       </div>
-      <div className='absolute bottom-0' id='btm'></div>
+      <div className='absolute bottom-0' ref={btmRef} id='btm'></div>
     </div>
   );
 }
