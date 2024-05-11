@@ -39,7 +39,7 @@ function AboutPage() {
       }
     }
   );
-  if (window.innerWidth > 1280 ) { // Only enable the scroll animation if the width of the viewport is greater than 768 pixels
+  if (window.innerWidth > 1280 ) {
     gsap.to(window, {
       scrollTrigger: {
         trigger: "#btm", // ID of the container that triggers the scroll
@@ -60,7 +60,7 @@ function AboutPage() {
       <div>
         <div className="flex flex-col justify-center items-center">
           <div ref={headingRef} className=' mt-20'>
-            <p className='text-7xl font-bold'>About Me</p>
+            <p className='text-7xl font-bold'>Tech In Me</p>
           </div>
           <div className='flex w-[80%] mt-20'>
             <div className='flex flex-col gap-10 mx-[10%]'>
