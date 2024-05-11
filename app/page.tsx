@@ -6,6 +6,7 @@ import AnimatedCursor from "react-animated-cursor"
 import { LandingPage } from "@/container/LandingPage";
 import { TimelinePage } from "@/container/TimelinePage";
 import { ProjectPage } from "@/container/ProjectPage";
+import { ProjectPageV2 } from "@/container/ProjectPageV2";
 
 export default function Home() {
 
@@ -30,7 +31,7 @@ export default function Home() {
       <div></div>
       <AboutPage/>
       <div></div>
-      <ProjectPage/>
+      <ProjectPageV2/>
     </main>
   );
 }

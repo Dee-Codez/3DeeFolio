@@ -118,7 +118,7 @@ function AboutPage() {
                     </div>
                   </div>
                   <div className='flex flex-col gap-5 items-center xl:flex-row'>
-                      <p className='text-xl'>Version Control, Testing: </p>
+                      <p className='text-xl'>Version Control, Monitoring: </p>
                       <div className='flex flex-wrap gap-7 scale-90 xl:scale-100 justify-center items-center'>
                         <ModernImage src='/icons/github.png' alt="Github" width={75} height={75} />
                         <ModernImage src='/icons/gitlab.png' alt="Gitlab" width={75} height={75} />

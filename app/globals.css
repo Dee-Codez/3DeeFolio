@@ -42,7 +42,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
+.vertical-timeline-element--work{
+  transition: opacity 0.5s;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;

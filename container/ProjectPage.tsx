@@ -2,8 +2,12 @@
 
 import { useRef,useEffect,useState } from 'react';
 import {gsap} from 'gsap';
+import { VerticalTimeline,VerticalTimelineElement} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
+import VisibilitySensor from 'react-visibility-sensor';
 
 function ProjectPage() {
+    
     
     const gradientRef = useRef(null);
     const [lineHeight, setLineHeight] = useState(0);
@@ -53,18 +57,112 @@ function ProjectPage() {
             <p className="text-3xl text-center">
               Here are some of my projects in a timeline format
             </p>
-            <div className='mt-20'>
-                <div className='flex flex-col gap-80'>
-                    <div className="relative">
-                        <div className="w-12 h-12 border-2 border-white rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                        <div className="w-8 h-8 bg-white rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                        <div style={{ height: `${lineHeight}px` }} className="absolute w-0.5 bg-white top-1/2 left-1/2 transform -translate-x-1/2"></div>
-                    </div>
-                    <div className="relative">
-                        <div className="w-12 h-12 border-2 border-white rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-
-                    </div>
-                </div>
+            <div className='mt-20 w-[80vw] transition-all duration-200'>
+                <VerticalTimeline className='font-aliensub font-bold'>
+                    <VisibilitySensor partialVisibility>
+                        {({isVisible}) =>
+                            <VerticalTimelineElement
+                                visible={isVisible}
+                                className="vertical-timeline-element--work "
+                                contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', marginTop: '20px' }}
+                                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                date="March 2023"
+                                iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                            >
+                                <h3 className="vertical-timeline-element-title">Landing Page</h3>
+                                <h4 className="vertical-timeline-element-subtitle"></h4>
+                                <p>
+                                    Started Off, Just like everyone else. Building the very first
+                                    website and shipping it off to the internet. Those were the days
+                                </p>
+                            </VerticalTimelineElement>
+                        }
+                    </VisibilitySensor>
+                    <VisibilitySensor partialVisibility>
+                        {({isVisible}) =>
+                            {
+                                return <VerticalTimelineElement
+                                    visible={isVisible}
+                                    className="vertical-timeline-element--work "
+                                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', marginTop: '20px' }}
+                                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                    date="April 2022"
+                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                >
+                                    <h3 className="vertical-timeline-element-title">Basic JS Timers</h3>
+                                    <h4 className="vertical-timeline-element-subtitle"></h4>
+                                    <p>
+                                        At this point Javascript came into my life and I migrated into it.
+                                        Trying whatever I could to make the website more interactive.
+                                    </p>
+                                </VerticalTimelineElement>;
+                            }
+                        }
+                    </VisibilitySensor>
+                    <VisibilitySensor partialVisibility>
+                        {({isVisible}) =>
+                            {
+                                return <VerticalTimelineElement
+                                    visible={isVisible}
+                                    className="vertical-timeline-element--work "
+                                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', marginTop: '20px' }}
+                                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                    date="April 2022"
+                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                >
+                                    <h3 className="vertical-timeline-element-title">ALgo Based ML Models</h3>
+                                    <h4 className="vertical-timeline-element-subtitle"></h4>
+                                    <p>
+                                        With the seemingly fresh trend of ChatGPT and AI, I also 
+                                        wanted to dive right into it. So I began tinkering with algorithms and data.
+                                    </p>
+                                </VerticalTimelineElement>;
+                            }
+                        }
+                    </VisibilitySensor>
+                    <VisibilitySensor partialVisibility>
+                        {({isVisible}) =>
+                            {
+                                return <VerticalTimelineElement
+                                    visible={isVisible}
+                                    className="vertical-timeline-element--work "
+                                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', marginTop: '20px' }}
+                                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                    date="April 2022"
+                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                >
+                                    <h3 className="vertical-timeline-element-title text-lg">DeeSharez</h3>
+                                    <h4 className="vertical-timeline-element-subtitle text-sm">React, SanityCMS</h4>
+                                    <p>
+                                        This was my first take at building a full stack application. Also My
+                                        first time using React, GAuth, third-party CMS and much more. It was a fun experience.
+                                    </p>
+                                </VerticalTimelineElement>;
+                            }
+                        }
+                    </VisibilitySensor>
+                    <VisibilitySensor partialVisibility>
+                        {({isVisible}) =>
+                            {
+                                return <VerticalTimelineElement
+                                    visible={isVisible}
+                                    className="vertical-timeline-element--work "
+                                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff', marginTop: '20px' }}
+                                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                    date="April 2022"
+                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                >
+                                    <h3 className="vertical-timeline-element-title text-lg">DeeSharez</h3>
+                                    <h4 className="vertical-timeline-element-subtitle text-sm">React, SanityCMS</h4>
+                                    <p>
+                                        This was my first take at building a full stack application. Also My
+                                        first time using React and third-party CMS. It was a fun experience.
+                                    </p>
+                                </VerticalTimelineElement>;
+                            }
+                        }
+                    </VisibilitySensor>
+                </VerticalTimeline>
             </div>
           </div>
         </div>
