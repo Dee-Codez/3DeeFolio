@@ -18,8 +18,10 @@ function ProjectPageV2() {
     const containerRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: 0, bottom: 0 });
     const [zIndexes, setZIndexes] = useState([]);
-    const [showImgIndices, setShowImgIndices] = React.useState([]);
+    const [showImgIndices, setShowImgIndices] = React.useState([0,1,2,3,4,5,6]);
     const btm2Ref = useRef(null);
+    const repoLinkRef = useRef(null);
+    const liveDemoRef = useRef(null);
 
     useEffect(() => {
         if (containerRef.current) {
@@ -195,14 +197,14 @@ function ProjectPageV2() {
                                         <h2 className='text-xl font-semibold'>{project.stack}</h2>
                                         <p className='text-lg mt-3'>{project.description}</p>
                                         <div className='flex-col hidden xl:flex items-center transition-all duration-200'>
-                                            <div onClick={() => {
+                                            <div id='noDrag' onClick={() => {
                                                 if (showImgIndices.includes(index)) {
                                                     setShowImgIndices(showImgIndices.filter(i => i !== index));
                                                 } else {
                                                     setShowImgIndices([...showImgIndices, index]);
                                                 }
                                             }}
-                                            className={`bg-white/20 mt-5 p-2 rounded-md ${showImgIndices.includes(index) ? `hidden` : `scale-100`} cursor-pointer`}>
+                                            className={`bg-white/20 mt-5 p-2 rounded-md ${showImgIndices.includes(index) ? `hidden` : `scale-100`} hover:bg-white/40 hover:scale-105 transition cursor-pointer`}>
                                                 Show Preview
                                             </div>
                                                 {showImgIndices.includes(index) && (
@@ -212,23 +214,23 @@ function ProjectPageV2() {
                                                             src={project.imgUrl}
                                                             width={450}
                                                             height={300}
-                                                            layout='fixed'
                                                             alt='Fetching Image...'
+                                                            className='rounded-md'
                                                             />
                                                         </div>
                                                         <div className='absolute transition cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  flex items-center justify-center opacity-0 group-hover:opacity-100' onClick={() => {
                                                         setShowImgIndices(showImgIndices.filter(i => i !== index));
                                                         }}>
-                                                            <p className='bg-black/40 p-4 rounded-lg'>Hide Preview</p>
+                                                            <p className='bg-black/40  hover:bg-black/80 hover:scale-110 transition p-4 rounded-lg'>Hide Preview</p>
                                                         </div>
                                                     </div>
                                                 )}  
                                             </div>
                                             <div className='flex my-5 justify-center gap-10'>
-                                                <Link id='noDrag' href={project.githubUrl} target='_blank' className='flex gap-2 items-center p-2 bg-white/20 rounded-md'>
+                                                <Link ref={repoLinkRef} id='noDrag' href={project.githubUrl} target='_blank' className='flex gap-2 items-center p-2 bg-white/20 hover:bg-white/40 hover:scale-105 transition rounded-md'>
                                                     <FaGithub /> Repo Link
                                                 </Link>
-                                                <Link id='noDrag' href={project.Url} target='_blank' className='flex gap-2 items-center p-2 bg-white/20 rounded-md'>
+                                                <Link ref={liveDemoRef} id='noDrag' href={project.Url} target='_blank' className='flex gap-2 items-center p-2 bg-white/20 hover:bg-white/40 hover:scale-105 transition rounded-md'>
                                                     <TbWorld /> Live Demo
                                                 </Link>
                                             </div>

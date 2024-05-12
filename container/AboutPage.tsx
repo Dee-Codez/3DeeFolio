@@ -43,7 +43,7 @@ function AboutPage() {
     gsap.to(window, {
       scrollTrigger: {
         trigger: "#btm", // ID of the container that triggers the scroll
-        start: "top bottom",
+        start: "top bottom-=200px",
         end: "top top",
         onEnter: () => gsap.to(window, { scrollTo: btmRef.current, duration: 1 }), // Scroll to the desired container
         scrub: true
