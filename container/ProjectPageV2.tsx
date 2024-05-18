@@ -17,17 +17,20 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
     const containerRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: 0, bottom: 0 });
     const [zIndexes, setZIndexes] = useState([]);
-    const [showImgIndices, setShowImgIndices] = React.useState([0,1,2,3,4,5,6]);
+    const [showImgIndices, setShowImgIndices] = useState([]);
+
     const btm2Ref = useRef(null);
     const repoLinkRef = useRef(null);
     const liveDemoRef = useRef(null);
+    const boundsRef = useRef(null);
 
     useEffect(() => {
-        if (containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            setBounds({ left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom });
-        }
-    }, []);
+        if (window.innerWidth > 1280) {
+            setShowImgIndices([0,1,2,3,4,5,6]);
+          } else {
+            setShowImgIndices([]);
+          }
+      }, []);
 
 
     const projects = [
@@ -165,12 +168,13 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
                 <div className='mt-20 pb-[10vh]'>
                     <div className='flex flex-col'>
                         <p className='text-7xl font-bold text-center'>Projects</p>
-                        <div className='mt-20 flex justify-center flex-wrap items-center gap-10 min-h-[100vh] xl:w-[80vw]'>
+                        <div ref={boundsRef} className='mt-20 relative flex justify-center overflow-hidden  flex-wrap items-center gap-10 min-h-[100vh] w-[90vw] xl:w-[80vw]'>
                             {projects.map((project, index) => (
                                 <Draggable
                                     key={index}
                                     nodeRef={projectRefs[index]}
                                     position={positions[index]}
+                                    bounds="parent"
                                     onStart={() => {
                                         gsap.killTweensOf(projectRefs[index].current);
                                         // Set the z-index on mouse down
@@ -197,7 +201,7 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
                                         <h1 className='text-3xl font-bold'>{project.title}</h1>
                                         <h2 className='text-xl font-semibold'>{project.stack}</h2>
                                         <p className='text-lg mt-3'>{project.description}</p>
-                                        <div className='flex-col hidden xl:flex items-center transition-all duration-200'>
+                                        <div className='flex-col flex items-center transition-all duration-200'>
                                             <div id='noDrag' onClick={() => {
                                                 if (showImgIndices.includes(index)) {
                                                     setShowImgIndices(showImgIndices.filter(i => i !== index));

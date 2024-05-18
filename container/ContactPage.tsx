@@ -3,6 +3,9 @@ import { useRef,useEffect,useState,forwardRef } from 'react';
 import { gsap } from 'gsap';
 import { IoSend } from "react-icons/io5";
 import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ModernImage } from '@/components/ModernImage';
 
 const ContactPage = forwardRef((props, ref) => {
 
@@ -69,9 +72,16 @@ const ContactPage = forwardRef((props, ref) => {
     <div ref={ref} style={{ backgroundImage: "linear-gradient(to left, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw'}} className="relative min-h-[100vh] font-neo">
         <div className="flex flex-col items-center mt-20 mb-28">
             <h1 className="text-7xl">Contact Me</h1>
+            <div className='mt-20 flex items-center'>
+                <p className="text-2xl">My Socials : </p>
+                <Link href="https://www.linkedin.com/in/debampati/" target='_blank'><ModernImage txtcn='text-md' src="/icons/linkedin.png" width={70} height={70} alt='LinkedIn' /></Link>
+                <Link href="https://www.instagram.com/___debs____/" target='_blank'><ModernImage txtcn='text-md' src="/icons/ig.webp" width={70} height={70} alt='Instagram' /></Link>
+                <Link href="https://wa.me/919454315004" target='_blank'><ModernImage txtcn='text-md' src="/icons/whatsapp.webp" width={70} height={70} alt='Whatsapp' /></Link>
+
+            </div>
             {!isSubmitted ? (
                 <>
-                    <form className='flex flex-col gap-8 mt-40 py-6 px-10 w-[90vw] xl:w-[40vw] bg-white/10 text-xl rounded-xl '>
+                    <form className='flex flex-col gap-8 mt-20 py-6 px-10 w-[90vw] xl:w-[40vw] bg-white/10 text-xl rounded-xl '>
                     <p ref={errRef} className={`bg-red-500 p-1 pl-2 font-bold ${isError?`inline`:`hidden`}`}>t</p>
                     <div className='flex flex-col xl:flex-row gap-5 w-full justify-between '>
                         <div className='flex flex-col gap-3'>
