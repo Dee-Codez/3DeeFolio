@@ -1,5 +1,5 @@
 "use client"
-import { useRef,useEffect,useState,forwardRef } from 'react';
+import { useRef,useEffect,useState,forwardRef,useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { IoSend } from "react-icons/io5";
 import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
@@ -57,7 +57,7 @@ const ContactPage = forwardRef((props, ref) => {
         e.target.style.height = `${e.target.scrollHeight}px`; 
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (ref.current) {
             gsap.to(ref.current, {
               backgroundPosition: '+200% 0',
@@ -69,7 +69,7 @@ const ContactPage = forwardRef((props, ref) => {
     
 
   return (
-    <div ref={ref} style={{ backgroundImage: "linear-gradient(to left, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw'}} className="relative min-h-[100vh] font-neo">
+    <div ref={ref} style={{ backgroundSize: '200% 100%'}} className="relative transition bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 w-full min-h-[100vh] font-neo">
         <div className="flex flex-col items-center mt-20 mb-28">
             <h1 className="text-7xl">Contact Me</h1>
             <div className='mt-20 flex items-center'>
@@ -81,25 +81,25 @@ const ContactPage = forwardRef((props, ref) => {
             </div>
             {!isSubmitted ? (
                 <>
-                    <form className='flex flex-col gap-8 mt-20 py-6 px-10 w-[90vw] xl:w-[40vw] bg-white/10 text-xl rounded-xl '>
+                    <form className='flex flex-col gap-8 mt-20 py-6 px-10 w-[90vw] xl:w-[40vw] bg-black/10 dark:bg-white/10 text-xl rounded-xl '>
                     <p ref={errRef} className={`bg-red-500 p-1 pl-2 font-bold ${isError?`inline`:`hidden`}`}>t</p>
                     <div className='flex flex-col xl:flex-row gap-5 w-full justify-between '>
                         <div className='flex flex-col gap-3'>
                             <label htmlFor="name">First Name * </label>
-                            <input ref={fnameRef} type="text" id="fname" name="fname" className='w-fit bg-white/20 rounded h-8  font-aliensub px-2' />
+                            <input ref={fnameRef} type="text" id="fname" name="fname" className='w-fit bg-black/20 dark:bg-white/20 rounded h-8  font-aliensub px-2' />
                         </div>
                         <div className='flex flex-col gap-3'>
                             <label htmlFor="name">Last Name </label>
-                            <input ref={lnameRef} type="text" id="lname" name="lname" className='w-fit bg-white/20 rounded h-8  font-aliensub px-2' />
+                            <input ref={lnameRef} type="text" id="lname" name="lname" className='w-fit bg-black/20 dark:bg-white/20 rounded h-8  font-aliensub px-2' />
                         </div>
                     </div>
                     <div className='flex flex-col gap-3'>
                         <label htmlFor="name">Email ID * </label>
-                        <input ref={mailRef} type="text" id="mail" name="mail" className=' bg-white/20 rounded h-8 font-aliensub px-2' />
+                        <input ref={mailRef} type="text" id="mail" name="mail" className=' bg-black/20 dark:bg-white/20 rounded h-8 font-aliensub px-2' />
                     </div>
                     <div className='flex flex-col gap-3'>
                         <label htmlFor="name">How Can I Help you ? *</label>
-                        <textarea onInput={autoResize} ref={messageRef} id="mail" name="mail" className=' bg-white/20 rounded font-aliensub px-2' />
+                        <textarea onInput={autoResize} ref={messageRef} id="mail" name="mail" className=' bg-black/20 dark:bg-white/20 rounded font-aliensub px-2' />
                     </div>
                     <div className='flex justify-center'>
                         <button onClick={handleSubmit} type="submit" className="submit-button w-fit flex items-center gap-3 bg-sky-500 transition hover:bg-sky-700 font-bold py-2 px-4 rounded">
@@ -111,14 +111,14 @@ const ContactPage = forwardRef((props, ref) => {
             </>
             ):(
                 <>
-                <div className='h-[50vh] mt-40 w-[90vw] xl:w-[40vw]  flex items-center justify-center text-2xl  '>
+                <div className='h-[20vh] mt-40 w-[90vw] xl:w-[40vw]  flex items-center justify-center text-2xl  '>
                     <p className='bg-white/10 py-6 px-10 rounded'>Information Sent Succesfully!!</p>
                 </div>
                 </>
             )}
             
         </div>
-        <p className='absolute text-center w-full pb-5 bottom-0 font-neo text-xl'>Made With ♡ by Debam</p>
+        <p className='absolute text-center w-full pb-5 bottom-0 font-neo text-xl'>Made With <span className='text-red-500 text-2xl'>♥</span> by Debam</p>
     </div>
   )
 })

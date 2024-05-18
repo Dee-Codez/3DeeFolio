@@ -5,6 +5,7 @@ import { Text3D } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { a as threeA, useSpring, config } from '@react-spring/three';
 import { MeshNormalMaterial } from 'three';
+import * as THREE from 'three';
 
 function LoadName() {
   return (
@@ -14,13 +15,14 @@ function LoadName() {
   );
 }
 
-function Name() {
+function Name({dark}) {
   const [hovered, setHovered] = useState(null);
   const [rotationAxis, setRotationAxis] = useState([0, 0, 1]); // default rotation axis is z-axis
   const letters = "Debam".split('');
   const hoverTimeout = useRef(null);
 
   const normalMaterial = new MeshNormalMaterial(); // Create a new MeshNormalMaterial
+
 
 
   const handlePointerOver = (i) => {
@@ -57,9 +59,9 @@ function Name() {
               <Text3D
                 size={3}
                 font="/helvetiker_bold.typeface.json"
-                material={normalMaterial}
               >
                 {letter}
+                {dark ? (<meshNormalMaterial attach="material"/>) : (<meshBasicMaterial attach="material" color="#383b40" />)}
               </Text3D>
             </threeA.mesh>
           );

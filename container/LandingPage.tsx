@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, forwardRef } from 'react';
+import { useEffect, useRef, forwardRef,useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { useSpring, animated } from 'react-spring';
 import { FaAngleDoubleDown } from "react-icons/fa";
@@ -11,12 +11,15 @@ import { Name } from '@/components/Name';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-const LandingPage = forwardRef((props, ref) => {
+const LandingPage = forwardRef(({ theme }, ref) => {
+
+  const scrollTrigger = useRef(null);
 
     const fadeInRef = useRef(null);
     const divRef = useRef(null);
     const doubleDownRef = useRef(null);
     const containerRef = useRef(null); // Ref for the container you want to scroll to
+    const btm1Ref = useRef();
 
   const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
 
@@ -46,7 +49,7 @@ const LandingPage = forwardRef((props, ref) => {
     };
   }, [set]);
 
-    useEffect(() => {
+  useLayoutEffect(() => {
         gsap.to(ref.current, {
           backgroundPosition: '200% 0',
           repeat: -1,
@@ -106,28 +109,27 @@ const LandingPage = forwardRef((props, ref) => {
             }
           });
 
-          if (window.innerWidth > 768 && containerRef.current!=null) { // Only enable the scroll animation if the width of the viewport is greater than 768 pixels
+          if (window.innerWidth > 1280 ) {
             gsap.to(window, {
               scrollTrigger: {
-                trigger: "#scrollTrig", // ID of the container that triggers the scroll
-                start: "top top",
+                trigger: ref.current, // ID of the container that triggers the scroll
+                start: "bottom bottom-=200",
                 end: "bottom top",
-                onEnter: () => gsap.to(window, { scrollTo: containerRef.current, duration: 1 }), // Scroll to the desired container
+                onEnter: () =>{gsap.to(window, { scrollTo: containerRef.current, duration: 1})},
+                // onLeaveBack: () =>{gsap.to(window, { scrollTo: ref.current, duration: 1})},
                 scrub: true
               }
             });
           }
-          
-
       }, []);
 
   return (
-    <div ref={ref} style={{ backgroundImage: "linear-gradient(to right, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw' }} className="flex flex-col min-h-[100vh] items-center justify-center">
+    <div ref={ref} style={{  backgroundSize: '200% 100%' }} className="flex w-full bg-cover bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 relative flex-col min-h-[100vh] items-center justify-center">
       <animated.div  ref={divRef} className="p-10  my-20 w-[90vw] text-center lg:text-left lg:w-[60vw] rounded-2xl font-neo bg-black/5 dark:bg-white/5 shadow-xl" style={{ boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(50px)', transform: xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) }}>
         <div ref={fadeInRef} id='fadeIn' className="opacity-0 flex flex-col gap-10">
           <p className="text-7xl font-neo ">Hello There</p>
           <div  className="flex flex-col xl:flex-row items-center gap-1">
-            <Name/>
+            <Name dark={theme}/>
             <p id='scrollTrig' className="text-5xl">This Side</p>
           </div>
           <p className="mt-10 text-3xl font-neo">Your go-to guy for all WebDev, Backend, ML, Ops Needs</p>

@@ -1,6 +1,6 @@
 "use client"
 
-import React,{ useRef,useEffect,useState,forwardRef } from 'react';
+import React,{ useRef,useEffect,useState,forwardRef,useLayoutEffect } from 'react';
 import {gsap} from 'gsap';
 import Image from 'next/image';
 
@@ -11,7 +11,7 @@ const ResumePage = forwardRef((props, ref) => {
     const [dwldText, setDwldText] = useState("Download PDF");
     const [copyText, setCopyText] = useState("Copy Link");
  
-    useEffect(() => {
+    useLayoutEffect(() => {
         gsap.to(ref.current, {
             backgroundPosition: '-200% 0',
             repeat: -1,
@@ -22,12 +22,13 @@ const ResumePage = forwardRef((props, ref) => {
             gsap.to(window, {
               scrollTrigger: {
                 trigger: ref.current, // ID of the container that triggers the scroll
-                start: "top bottom", //top of the trigger element hits bottom of the viewport
-                end: "top top", //end when top of the trigger element hits top of the viewport
+                start: "bottom bottom-=800", //bottom of the trigger element hits bottom of the viewport
+                end: "bottom top", //end when bottom of the trigger element hits top of the viewport
                 onEnter: () => gsap.to(window, { scrollTo: btm3Ref.current, duration: 1 }),
+                // onLeaveBack: () => gsap.to(window, { scrollTo: ref.current, duration: 1 }),
                 scrub: true
               }
-            });
+            })
           }
     }, []);
 
@@ -54,11 +55,9 @@ const ResumePage = forwardRef((props, ref) => {
     <div
       ref={ref}
       style={{
-        backgroundImage: 'linear-gradient(to right, #00032a, #00043f, #00032a)',
         backgroundSize: '200% 100%',
-        width: '100vw',
       }}
-      className="flex font-neo flex-col min-h-[100vh] relative  items-center"
+      className="flex transition bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 w-full font-neo flex-col min-h-[100vh] relative  items-center"
     >
         <div>
             <div>
@@ -67,11 +66,11 @@ const ResumePage = forwardRef((props, ref) => {
                     <p className='text-center text-7xl font-bold'>Resume</p>
                     <div className='mt-20 flex gap-10 justify-center'>
                     <a onClick={onDwld} href='/Debam Resume.pdf' download>
-                      <div  className='p-2 bg-white/20 hover:bg-white/40 hover:scale-105 transition rounded-md w-fit '>
+                      <div  className='p-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition rounded-md w-fit '>
                           <p>{dwldText}</p>
                       </div>
                     </a>
-                        <div onClick={onCopy} className='cursor-pointer p-2 bg-white/20 hover:bg-white/40 hover:scale-105 transition rounded-md w-fit'>
+                        <div onClick={onCopy} className='cursor-pointer p-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition rounded-md w-fit'>
                             <p>{copyText}</p>
                         </div>
                     </div>

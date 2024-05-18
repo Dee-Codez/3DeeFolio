@@ -1,10 +1,11 @@
 "use client"
 
-import { useRef, useEffect,forwardRef  } from 'react';
+import { useRef, useEffect,forwardRef,useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { ModernImage } from '@/components/ModernImage';
+import Link from 'next/link';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,8 +15,7 @@ const AboutPage = forwardRef((props, ref) => {
   const headingRef = useRef(null);
   const btmRef = useRef(null);
   
-  useEffect(() => {
-
+  useLayoutEffect(() => {
     if (ref.current) {
       gsap.to(ref.current, {
         backgroundPosition: '-200% 0',
@@ -43,13 +43,14 @@ const AboutPage = forwardRef((props, ref) => {
   if (window.innerWidth > 1280 ) {
     gsap.to(window, {
       scrollTrigger: {
-        trigger: "#btm", // ID of the container that triggers the scroll
-        start: "top bottom-=200px",
-        end: "top top",
-        onEnter: () => gsap.to(window, { scrollTo: btmRef.current, duration: 1 }), // Scroll to the desired container
+        trigger: ref.current, // ID of the container that triggers the scroll
+        start: "bottom bottom-=200", //bottom of the trigger element hits bottom of the viewport
+        end: "bottom top", //end when bottom of the trigger element hits top of the viewport
+        onEnter: () => gsap.to(window, { scrollTo: btmRef.current, duration: 1 }),
+        // onLeaveBack: () => gsap.to(window, { scrollTo: ref.current, duration: 1 }),
         scrub: true
       }
-    });
+    })
   }
   }, [])
 
@@ -57,14 +58,20 @@ const AboutPage = forwardRef((props, ref) => {
   
 
   return (
-    <div ref={ref} style={{ backgroundImage: "linear-gradient(to left, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw'}} className="relative min-h-[200vh] font-neo">
+    <div ref={ref} style={{  backgroundSize: '200% 100%' }} className="relative bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 w-full min-h-[200vh] font-neo">
       <div>
         <div className="flex flex-col justify-center items-center">
           <div ref={headingRef} className=' mt-20'>
             <p className='text-7xl font-bold'>Tech In Me</p>
           </div>
           <div className='flex w-[80%] mt-20'>
-            <div className='flex flex-col gap-10 mx-[10%]'>
+            <div className='flex flex-col gap-10 mx-[10%] text-center xl:text-left'>
+                <div className='flex items-center gap-4'>
+                  <p className='text-3xl font-bold'>Public Profiles : </p>
+                  <Link href="https://github.com/Dee-Codez" target='_blank'><ModernImage src='/icons/github.png' alt="Github" txtcn='text-md' width={50} height={50} /></Link>
+                  <Link href="https://www.codechef.com/users/debspats" target='_blank'><ModernImage src='/icons/codechef.webp' alt="CodeChef" txtcn='text-sm text-black' width={43} height={43} /></Link>
+                  <Link href="https://leetcode.com/u/DeeCodez/" target='_blank'><ModernImage src='/icons/lc.webp' alt="LeetCode" txtcn='text-sm text-black' width={50} height={50} /></Link>
+                </div>
                 <p className='text-3xl font-bold'>Core Languages : </p>
                 <div className='flex scale-90 xl:scale-100 flex-wrap justify-center gap-8 text-3xl'>
                   <div className='flex  flex-col gap-1 items-center'> 

@@ -1,5 +1,5 @@
 "use client"
-import React,{ useRef,useEffect,useState,useMemo,forwardRef } from 'react';
+import React,{ useRef,useEffect,useState,useLayoutEffect,forwardRef } from 'react';
 import {gsap} from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -129,7 +129,7 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
             duration: 10,
         });
     };
-    useEffect(() => {
+    useLayoutEffect(() => {
         if(ref.current != null) {
             gsap.to(ref.current, {
                 backgroundPosition: '200% 0',
@@ -137,18 +137,19 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
                 duration: 10,
               });    
         }
-        
-          if (window.innerWidth > 1280 ) {
+        if (window.innerWidth > 1280 ) {
             gsap.to(window, {
               scrollTrigger: {
-                trigger: "#btm2", // ID of the container that triggers the scroll
-                start: "top bottom-=200", //top of the trigger element hits bottom of the viewport
-                end: "top top", //end when top of the trigger element hits top of the viewport
+                trigger: ref.current, // ID of the container that triggers the scroll
+                start: "bottom bottom-=800", //bottom of the trigger element hits bottom of the viewport
+                end: "bottom top", //end when bottom of the trigger element hits top of the viewport
                 onEnter: () => gsap.to(window, { scrollTo: btm2Ref.current, duration: 1 }),
+                // onLeaveBack: () => gsap.to(window, { scrollTo: ref.current, duration: 1 }),
                 scrub: true
               }
-            });
+            })
           }
+    
 
         projectRefs.forEach((ref, index) => animate(ref.current, positions[index]));      
     }, []);
@@ -156,12 +157,8 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
   return (
     <div
       ref={ref}
-      style={{
-        backgroundImage: 'linear-gradient(to right, #00032a, #00043f, #00032a)',
-        backgroundSize: '200% 100%',
-        width: '100vw',
-      }}
-      className="flex relative font-neo flex-col min-h-[100vh] items-center"
+      style={{backgroundSize: '200% 100%'}}
+      className="flex transition bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 w-full relative font-neo flex-col min-h-[100vh] pb-10 items-center"
     >
         <div>
             <div>
@@ -194,7 +191,7 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
                                     >
                                     <div
                                         ref={projectRefs[index]}
-                                        className='bg-white/10 backdrop-blur m-5 font-alien2 w-[80%] xl:w-[30%] p-4 rounded-lg'
+                                        className='bg-black/10 dark:bg-white/10 backdrop-blur m-5 font-alien2 w-[80%] xl:w-[30%] p-4 rounded-lg'
                                         style={{ zIndex: zOrders.indexOf(index), boxShadow: '2px 2px 10px 2px rgba(0, 0, 0, 0.3)'}} 
                                         
                                     >
@@ -209,7 +206,7 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
                                                     setShowImgIndices([...showImgIndices, index]);
                                                 }
                                             }}
-                                            className={`bg-white/20 mt-5 p-2 rounded-md ${showImgIndices.includes(index) ? `hidden` : `scale-100`} hover:bg-white/40 hover:scale-105 transition cursor-pointer`}>
+                                            className={`bg-black/20 dark:bg-white/20 mt-5 p-2 rounded-md ${showImgIndices.includes(index) ? `hidden` : `scale-100`} hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition cursor-pointer`}>
                                                 Show Preview
                                             </div>
                                                 {showImgIndices.includes(index) && (
@@ -226,16 +223,16 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
                                                         <div className='absolute transition cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  flex items-center justify-center opacity-0 group-hover:opacity-100' onClick={() => {
                                                         setShowImgIndices(showImgIndices.filter(i => i !== index));
                                                         }}>
-                                                            <p className='bg-black/40  hover:bg-black/80 hover:scale-110 transition p-4 rounded-lg'>Hide Preview</p>
+                                                            <p className='bg-black/40 text-white text-center hover:bg-black/80 hover:scale-110 transition p-4 rounded-lg'>Hide Preview</p>
                                                         </div>
                                                     </div>
                                                 )}  
                                             </div>
                                             <div className='flex my-5 justify-center gap-10'>
-                                                <Link ref={repoLinkRef} id='noDrag' href={project.githubUrl} target='_blank' className='flex gap-2 items-center p-2 bg-white/20 hover:bg-white/40 hover:scale-105 transition rounded-md'>
+                                                <Link ref={repoLinkRef} id='noDrag' href={project.githubUrl} target='_blank' className='flex gap-2 items-center p-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition rounded-md'>
                                                     <FaGithub /> Repo Link
                                                 </Link>
-                                                <Link ref={liveDemoRef} id='noDrag' href={project.Url} target='_blank' className='flex gap-2 items-center p-2 bg-white/20 hover:bg-white/40 hover:scale-105 transition rounded-md'>
+                                                <Link ref={liveDemoRef} id='noDrag' href={project.Url} target='_blank' className='flex gap-2 items-center p-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition rounded-md'>
                                                     <TbWorld /> Live Demo
                                                 </Link>
                                             </div>
