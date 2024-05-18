@@ -1,5 +1,5 @@
 "use client"
-import React,{ useRef,useEffect,useState,useMemo } from 'react';
+import React,{ useRef,useEffect,useState,useMemo,forwardRef } from 'react';
 import {gsap} from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -12,9 +12,8 @@ import { TbWorld } from "react-icons/tb";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 
-function ProjectPageV2() {
+const ProjectPageV2 = forwardRef((props, ref) =>{
 
-    const gradientRef = useRef(null);
     const containerRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: 0, bottom: 0 });
     const [zIndexes, setZIndexes] = useState([]);
@@ -99,6 +98,9 @@ function ProjectPageV2() {
     ];
 
     const projectRefs = projects.map(() => React.createRef());
+
+    const [zOrders, setZOrders] = useState(projects.map((_, i) => i));
+
     const [positions, setPositions] = useState(() => {
         return projects.map((_, index) => {
           if (typeof window !== 'undefined' && window.innerWidth > 1024) {
@@ -125,12 +127,14 @@ function ProjectPageV2() {
         });
     };
     useEffect(() => {
-        gsap.to(gradientRef.current, {
-            backgroundPosition: '200% 0',
-            repeat: -1,
-            duration: 10,
-          });
-
+        if(ref.current != null) {
+            gsap.to(ref.current, {
+                backgroundPosition: '200% 0',
+                repeat: -1,
+                duration: 10,
+              });    
+        }
+        
           if (window.innerWidth > 1280 ) {
             gsap.to(window, {
               scrollTrigger: {
@@ -148,7 +152,7 @@ function ProjectPageV2() {
 
   return (
     <div
-      ref={gradientRef}
+      ref={ref}
       style={{
         backgroundImage: 'linear-gradient(to right, #00032a, #00043f, #00032a)',
         backgroundSize: '200% 100%',
@@ -167,7 +171,14 @@ function ProjectPageV2() {
                                     key={index}
                                     nodeRef={projectRefs[index]}
                                     position={positions[index]}
-                                    onStart={() => gsap.killTweensOf(projectRefs[index].current)}
+                                    onStart={() => {
+                                        gsap.killTweensOf(projectRefs[index].current);
+                                        // Set the z-index on mouse down
+                                        const newZOrders = [...zOrders];
+                                        newZOrders.splice(newZOrders.indexOf(index), 1); // remove current index
+                                        newZOrders.push(index); // add it to the end
+                                        setZOrders(newZOrders); // update state
+                                    }}
                                     onStop={(e, data) => {
                                         const newPositions = [...positions];
                                         newPositions[index] = { x: data.x, y: data.y };
@@ -180,18 +191,8 @@ function ProjectPageV2() {
                                     <div
                                         ref={projectRefs[index]}
                                         className='bg-white/10 backdrop-blur m-5 font-alien2 w-[80%] xl:w-[30%] p-4 rounded-lg'
-                                        style={{ zIndex: zIndexes[index], boxShadow: '2px 2px 10px 2px rgba(0, 0, 0, 0.3)'}} 
-                                        onClick={() => {
-                                            gsap.set(projectRefs[index].current, { clearProps: "zIndex" });
-                                            projectRefs.forEach((ref, i) => {
-                                                if (i === index) {
-                                                  ref.current.style.zIndex = "1";
-                                                } else {
-                                                  ref.current.style.zIndex = "0";
-                                                }
-                                              });
-                                            gsap.set(projectRefs[index].current, { zIndex: "1" });
-                                        }}
+                                        style={{ zIndex: zOrders.indexOf(index), boxShadow: '2px 2px 10px 2px rgba(0, 0, 0, 0.3)'}} 
+                                        
                                     >
                                         <h1 className='text-3xl font-bold'>{project.title}</h1>
                                         <h2 className='text-xl font-semibold'>{project.stack}</h2>
@@ -245,6 +246,8 @@ function ProjectPageV2() {
     <div ref={btm2Ref} id='btm2' className='absolute bottom-0'></div>                        
     </div>
   );
-}
+});
+
+ProjectPageV2.displayName = 'ProjectPageV2';
 
 export { ProjectPageV2 };

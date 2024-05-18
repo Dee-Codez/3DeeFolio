@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, forwardRef } from 'react';
 import { gsap } from 'gsap';
 import { useSpring, animated } from 'react-spring';
 import { FaAngleDoubleDown } from "react-icons/fa";
@@ -11,9 +11,8 @@ import { Name } from '@/components/Name';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-function LandingPage() {
+const LandingPage = forwardRef((props, ref) => {
 
-    const gradientRef = useRef(null);
     const fadeInRef = useRef(null);
     const divRef = useRef(null);
     const doubleDownRef = useRef(null);
@@ -48,7 +47,7 @@ function LandingPage() {
   }, [set]);
 
     useEffect(() => {
-        gsap.to(gradientRef.current, {
+        gsap.to(ref.current, {
           backgroundPosition: '200% 0',
           repeat: -1,
           duration: 10,
@@ -123,8 +122,8 @@ function LandingPage() {
       }, []);
 
   return (
-    <div ref={gradientRef} style={{ backgroundImage: "linear-gradient(to right, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw' }} className="flex flex-col min-h-[100vh] items-center justify-center">
-      <animated.div  ref={divRef} className="p-10  my-20 w-[90vw] text-center lg:text-left lg:w-[60vw] rounded-2xl font-neo bg-white/5 shadow-xl" style={{ boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(50px)', transform: xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) }}>
+    <div ref={ref} style={{ backgroundImage: "linear-gradient(to right, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw' }} className="flex flex-col min-h-[100vh] items-center justify-center">
+      <animated.div  ref={divRef} className="p-10  my-20 w-[90vw] text-center lg:text-left lg:w-[60vw] rounded-2xl font-neo bg-black/5 dark:bg-white/5 shadow-xl" style={{ boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(50px)', transform: xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) }}>
         <div ref={fadeInRef} id='fadeIn' className="opacity-0 flex flex-col gap-10">
           <p className="text-7xl font-neo ">Hello There</p>
           <div  className="flex flex-col xl:flex-row items-center gap-1">
@@ -146,6 +145,8 @@ function LandingPage() {
         <div ref={containerRef} className='xl:absolute z-30 xl:bottom-0'>{/* Bottom Endpoint For GSAP Scroll */}</div>
     </div>
   );
-}
+});
+
+LandingPage.displayName = 'LandingPage';
 
 export { LandingPage };

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect,forwardRef  } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
@@ -9,19 +9,20 @@ import { ModernImage } from '@/components/ModernImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function AboutPage() {
+const AboutPage = forwardRef((props, ref) => {
   const bgGradient = "linear-gradient(to right, #00032a, #00043f, #00032a)";
   const headingRef = useRef(null);
-  const gradRef = useRef(null);
   const btmRef = useRef(null);
   
   useEffect(() => {
 
-    gsap.to(gradRef.current, {
-      backgroundPosition: '-200% 0',
-      repeat: -1,
-      duration: 10,
-    });
+    if (ref.current) {
+      gsap.to(ref.current, {
+        backgroundPosition: '-200% 0',
+        repeat: -1,
+        duration: 10,
+      });
+    }
 
     gsap.fromTo(headingRef.current, {
       opacity: 0,
@@ -56,7 +57,7 @@ function AboutPage() {
   
 
   return (
-    <div ref={gradRef} style={{ backgroundImage: "linear-gradient(to left, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw'}} className="relative min-h-[200vh] font-neo">
+    <div ref={ref} style={{ backgroundImage: "linear-gradient(to left, #00032a, #00043f, #00032a)", backgroundSize: '200% 100%', width: '100vw'}} className="relative min-h-[200vh] font-neo">
       <div>
         <div className="flex flex-col justify-center items-center">
           <div ref={headingRef} className=' mt-20'>
@@ -201,6 +202,7 @@ function AboutPage() {
       <div className='absolute bottom-0' ref={btmRef} id='btm'></div>
     </div>
   );
-}
+});
 
+AboutPage.displayName = 'AboutPage';
 export { AboutPage };

@@ -1,21 +1,34 @@
 "use client"
 
-import React,{ useRef,useEffect,useState } from 'react';
+import React,{ useRef,useEffect,useState,forwardRef } from 'react';
 import {gsap} from 'gsap';
 import Image from 'next/image';
 
-function ResumePage() {
+const ResumePage = forwardRef((props, ref) => {
 
-    const gradientRef = useRef(null);
+    const btm3Ref = useRef(null);
+
     const [dwldText, setDwldText] = useState("Download PDF");
     const [copyText, setCopyText] = useState("Copy Link");
  
     useEffect(() => {
-        gsap.to(gradientRef.current, {
+        gsap.to(ref.current, {
             backgroundPosition: '-200% 0',
             repeat: -1,
             duration: 10,
           });
+
+          if (window.innerWidth > 1280 ) {
+            gsap.to(window, {
+              scrollTrigger: {
+                trigger: "#btm3", // ID of the container that triggers the scroll
+                start: "top bottom-=200", //top of the trigger element hits bottom of the viewport
+                end: "top top", //end when top of the trigger element hits top of the viewport
+                onEnter: () => gsap.to(window, { scrollTo: btm3Ref.current, duration: 1 }),
+                scrub: true
+              }
+            });
+          }
     }, []);
 
     const onDwld = async () => {
@@ -39,13 +52,13 @@ function ResumePage() {
 
   return (
     <div
-      ref={gradientRef}
+      ref={ref}
       style={{
         backgroundImage: 'linear-gradient(to right, #00032a, #00043f, #00032a)',
         backgroundSize: '200% 100%',
         width: '100vw',
       }}
-      className="flex font-neo flex-col min-h-[100vh]  items-center"
+      className="flex font-neo flex-col min-h-[100vh] relative  items-center"
     >
         <div>
             <div>
@@ -75,9 +88,11 @@ function ResumePage() {
                 </div>
             </div>
         </div>
-        <div id='bt'></div>
+        <div id='btm3' ref={btm3Ref} className='absolute bottom-0'></div>
     </div>
   );
-}
+});
+
+ResumePage.displayName = 'ResumePage';
 
 export { ResumePage };
