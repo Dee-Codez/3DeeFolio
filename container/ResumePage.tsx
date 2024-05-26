@@ -22,7 +22,7 @@ const ResumePage = forwardRef((props, ref) => {
             gsap.to(window, {
               scrollTrigger: {
                 trigger: ref.current, // ID of the container that triggers the scroll
-                start: "bottom bottom-=800", //bottom of the trigger element hits bottom of the viewport
+                start: "bottom bottom-=700", //bottom of the trigger element hits bottom of the viewport
                 end: "bottom top", //end when bottom of the trigger element hits top of the viewport
                 onEnter: () => gsap.to(window, { scrollTo: btm3Ref.current, duration: 1 }),
                 // onLeaveBack: () => gsap.to(window, { scrollTo: ref.current, duration: 1 }),

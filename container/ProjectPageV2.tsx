@@ -13,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 
 const ProjectPageV2 = forwardRef((props, ref) =>{
+    
 
     const containerRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: 0, bottom: 0 });
@@ -141,7 +142,7 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
             gsap.to(window, {
               scrollTrigger: {
                 trigger: ref.current, // ID of the container that triggers the scroll
-                start: "bottom bottom-=800", //bottom of the trigger element hits bottom of the viewport
+                start: "bottom bottom-=700", //bottom of the trigger element hits bottom of the viewport
                 end: "bottom top", //end when bottom of the trigger element hits top of the viewport
                 onEnter: () => gsap.to(window, { scrollTo: btm2Ref.current, duration: 1 }),
                 // onLeaveBack: () => gsap.to(window, { scrollTo: ref.current, duration: 1 }),
@@ -195,9 +196,9 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
                                         style={{ zIndex: zOrders.indexOf(index), boxShadow: '2px 2px 10px 2px rgba(0, 0, 0, 0.3)'}} 
                                         
                                     >
-                                        <h1 className='text-3xl font-bold'>{project.title}</h1>
-                                        <h2 className='text-xl font-semibold'>{project.stack}</h2>
-                                        <p className='text-lg mt-3'>{project.description}</p>
+                                        <h1 className='text-3xl font-black'>{project.title}</h1>
+                                        <h2 className='text-xl font-bold'>{project.stack}</h2>
+                                        <p className='text-lg mt-3 font-semibold'>{project.description}</p>
                                         <div className='flex-col flex items-center transition-all duration-200'>
                                             <div id='noDrag' onClick={() => {
                                                 if (showImgIndices.includes(index)) {

@@ -39,7 +39,6 @@ function Name({dark}) {
 
   return (
     <div style={{ width: 'fit-content', height: 'fit-content' }}>
-      <Suspense fallback={<LoadName/>}>
       <Canvas>
         
         {letters.map((letter, i) => {
@@ -68,7 +67,6 @@ function Name({dark}) {
         })}
         
       </Canvas>
-      </Suspense>
     </div>
   );
 }

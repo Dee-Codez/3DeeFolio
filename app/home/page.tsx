@@ -12,7 +12,9 @@ import { RxCross2 } from "react-icons/rx";
 import { FaDownload } from "react-icons/fa6";
 import { MdDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
+import { useGSAP } from '@gsap/react';
 
+import {loading} from "@/app/home/loading";
 import { LandingPage } from "@/container/LandingPage";
 import { AboutPage } from "@/container/AboutPage";
 import { TimelinePage } from "@/container/TimelinePage";
@@ -233,6 +235,7 @@ export default function Home() {
   }, []);
 
   return (
+    <Suspense fallback={<loading />}>
     <main className={`flex flex-col text-black items-center ${darkMode ? 'dark text-white' : ''}`}>
       <div ref={sliderRef} className="w-full fixed top-0 z-50">
         <div id="horLine" ref={horLineRef} className="h-[6px] bg-black/20 dark:bg-white/20 w-fit"></div>
@@ -322,5 +325,7 @@ export default function Home() {
       ))}
       </div>
     </main>
+    </Suspense>
+
   );
 }
