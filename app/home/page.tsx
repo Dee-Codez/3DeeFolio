@@ -14,7 +14,7 @@ import { MdDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
 import { useGSAP } from '@gsap/react';
 
-import {loading} from "@/app/home/loading";
+import loading from "@/app/home/loading";
 import { LandingPage } from "@/container/LandingPage";
 import { AboutPage } from "@/container/AboutPage";
 import { TimelinePage } from "@/container/TimelinePage";
