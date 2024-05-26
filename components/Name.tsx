@@ -7,23 +7,17 @@ import { a as threeA, useSpring, config } from '@react-spring/three';
 import { MeshNormalMaterial } from 'three';
 import * as THREE from 'three';
 
-function LoadName() {
-  return (
-    <div>
-      Loading Name Model..
-    </div>
-  );
-}
-
-function Name({dark}) {
+const Letter = ({darktheme, letter, index, letters }) => {
+  
   const [hovered, setHovered] = useState(null);
   const [rotationAxis, setRotationAxis] = useState([0, 0, 1]); // default rotation axis is z-axis
-  const letters = "Debam".split('');
+
+  const { rotation } = useSpring({
+    rotation: hovered === index ? rotationAxis.map(axis => axis * Math.PI / 2) : [0, 0, 0],
+    config: config.slow,
+  });
+
   const hoverTimeout = useRef(null);
-
-  const normalMaterial = new MeshNormalMaterial(); // Create a new MeshNormalMaterial
-
-
 
   const handlePointerOver = (i) => {
     hoverTimeout.current = setTimeout(() => {
@@ -38,36 +32,32 @@ function Name({dark}) {
   };
 
   return (
-    <div style={{ width: 'fit-content', height: 'fit-content' }}>
-      <Canvas>
-        
-        {letters.map((letter, i) => {
-          const { rotation } = useSpring({
-            rotation: hovered === i ? rotationAxis.map(axis => axis * Math.PI / 2) : [0, 0, 0],
-            config: config.slow,
-          });
+    <threeA.mesh
+      key={index}
+      position={index === 0 ? [-7.3, -1, 0] : [(index - letters.length / 2) * 2.5 - 0.5, -1, 0]}
+      onPointerOver={() => handlePointerOver(index)}
+      onPointerOut={handlePointerOut}
+      rotation={rotation}
+    >
+      <Text3D size={3} font="/helvetiker_bold.typeface.json">
+        {letter}
+        {darktheme ? (<meshNormalMaterial attach="material"/>) : (<meshBasicMaterial attach="material" color="#383b40" />)}
+      </Text3D>
+    </threeA.mesh>
+  );
+};
 
-          return (
-            <threeA.mesh
-              key={i}
-              position={(i==0)?[-7.3,-1,0]:[(i - letters.length / 2) * 2.5-0.5, -1, 0]} // adjust position based on index
-              onPointerOver={() => handlePointerOver(i)}
-              onPointerOut={handlePointerOut}
-              rotation={rotation} // use the animated rotation value
-            >
-              <Text3D
-                size={3}
-                font="/helvetiker_bold.typeface.json"
-              >
-                {letter}
-                {dark ? (<meshNormalMaterial attach="material"/>) : (<meshBasicMaterial attach="material" color="#383b40" />)}
-              </Text3D>
-            </threeA.mesh>
-          );
-        })}
-        
-      </Canvas>
-    </div>
+function Name({dark}) {
+  const letters = "Debam".split('');  
+
+  return (
+    <div style={{ width: 'fit-content', height: 'fit-content' }}>
+    <Canvas>
+      {letters.map((letter, i) => (
+        <Letter darktheme={dark} key={i} letter={letter} index={i} letters={letters} />
+      ))}
+    </Canvas>
+  </div>
   );
 }
 
