@@ -10,8 +10,10 @@ import Link from 'next/link';
 import { Name } from '@/components/Name';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-const LandingPage = forwardRef(({ theme }, ref) => {
+type LandingPageProps = {
+  theme: boolean;
+};
+const LandingPage = forwardRef((props: LandingPageProps, ref: React.Ref<any>) => {
 
   const scrollTrigger = useRef(null);
 
@@ -22,7 +24,7 @@ const LandingPage = forwardRef(({ theme }, ref) => {
     const btm1Ref = useRef();
 
   const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
-
+  
   useEffect(() => {
     const handleMouseMove = (event) => {
       const { clientX, clientY } = event;
