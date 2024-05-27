@@ -38,8 +38,8 @@ export default function Home() {
 
   const sliderRef = useRef(null);
   const horLineRef = useRef(null);
-  const textRef = useRef<HTMLElement | null>(null);
-
+  const textRef = useRef<HTMLParagraphElement>(null);
+  
   const MainRef = useRef(null);
   const skillMainRef = useRef();
   const projectMainRef = useRef();
