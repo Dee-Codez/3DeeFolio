@@ -39,7 +39,7 @@ export default function Home() {
   const textRef = useRef<HTMLParagraphElement>(null);
   
   const MainRef = useRef(null);
-  const skillMainRef = useRef();
+  const skillMainRef = useRef<HTMLDivElement>();
   const projectMainRef = useRef();
   const contactMainRef = useRef();
   const resMainRef = useRef();

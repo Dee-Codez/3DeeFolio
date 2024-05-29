@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect,forwardRef,useLayoutEffect } from 'react';
+import { useRef, useEffect,forwardRef,useLayoutEffect, ForwardedRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
@@ -10,13 +10,13 @@ import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AboutPage = forwardRef((props, ref) => {
+const AboutPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
   const bgGradient = "linear-gradient(to right, #00032a, #00043f, #00032a)";
   const headingRef = useRef(null);
   const btmRef = useRef(null);
   
   useLayoutEffect(() => {
-    if (ref.current) {
+    if ('current' in ref && ref.current) {
       gsap.to(ref.current, {
         backgroundPosition: '-200% 0',
         repeat: -1,
@@ -40,7 +40,7 @@ const AboutPage = forwardRef((props, ref) => {
       }
     }
   );
-  if (window.innerWidth > 1280 ) {
+  if (window.innerWidth > 1280 && 'current' in ref && ref.current) {
     gsap.to(window, {
       scrollTrigger: {
         trigger: ref.current, // ID of the container that triggers the scroll
