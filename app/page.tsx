@@ -248,7 +248,7 @@ export default function Home() {
           mixBlendMode: 'soft-light',
         }}
       /> */}
-        <LandingPage ref={MainRef} theme={darkMode} />
+        <LandingPage ref={MainRef} darkMode={darkMode} />
       <AboutPage ref={skillMainRef} />
       <ProjectPageV2 ref={projectMainRef}/>
       <ResumePage ref={resMainRef}/>

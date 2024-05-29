@@ -12,11 +12,13 @@ const Letter = ({darktheme, letter, index, letters }) => {
   const [hovered, setHovered] = useState(null);
   const [rotationAxis, setRotationAxis] = useState([0, 0, 1]); // default rotation axis is z-axis
 
-  const { rotation } = useSpring({
+  const { rotation: animatedRotation } = useSpring({
     rotation: hovered === index ? rotationAxis.map(axis => axis * Math.PI / 2) : [0, 0, 0],
     config: config.slow,
   });
+  const rotation = animatedRotation as unknown as [number, number, number];
 
+  
   const hoverTimeout = useRef(null);
 
   const handlePointerOver = (i) => {

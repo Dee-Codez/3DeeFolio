@@ -11,9 +11,9 @@ import { Name } from '@/components/Name';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 type LandingPageProps = {
-  theme: boolean;
+  darkMode: boolean;
 };
-const LandingPage = forwardRef((props: LandingPageProps, ref: React.Ref<any>) => {
+const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<any>) => {
 
   const scrollTrigger = useRef(null);
 
@@ -131,7 +131,7 @@ const LandingPage = forwardRef((props: LandingPageProps, ref: React.Ref<any>) =>
         <div ref={fadeInRef} id='fadeIn' className="opacity-0 flex flex-col gap-10">
           <p className="text-7xl font-neo ">Hello There</p>
           <div  className="flex flex-col xl:flex-row items-center gap-1">
-            <Name dark={theme}/>
+            <Name dark={darkMode}/>
             <p id='scrollTrig' className="text-5xl">This Side</p>
           </div>
           <p className="mt-10 text-3xl font-neo">Your go-to guy for all WebDev, Backend, ML, Ops Needs</p>
