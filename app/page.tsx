@@ -15,8 +15,6 @@ import { MdOutlineLightMode } from "react-icons/md";
 
 import { LandingPage } from "@/container/LandingPage";
 import { AboutPage } from "@/container/AboutPage";
-import { TimelinePage } from "@/container/TimelinePage";
-import { ProjectPage } from "@/container/ProjectPage";
 import { ProjectPageV2 } from "@/container/ProjectPageV2";
 import { ResumePage } from "@/container/ResumePage";
 import { ContactPage } from "@/container/ContactPage";
