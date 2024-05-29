@@ -1,5 +1,5 @@
 "use client"
-import { useRef,useEffect,useState,forwardRef,useLayoutEffect } from 'react';
+import { useRef,useEffect,useState,forwardRef,useLayoutEffect, ForwardedRef } from 'react';
 import { gsap } from 'gsap';
 import { IoSend } from "react-icons/io5";
 import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ModernImage } from '@/components/ModernImage';
 
-const ContactPage = forwardRef((props, ref) => {
+const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
 
     const fnameRef = useRef(null);
     const lnameRef = useRef(null);
@@ -58,7 +58,7 @@ const ContactPage = forwardRef((props, ref) => {
     };
 
     useLayoutEffect(() => {
-        if (ref.current) {
+        if ('current' in ref && ref.current) {
             gsap.to(ref.current, {
               backgroundPosition: '+200% 0',
               repeat: -1,

@@ -38,11 +38,11 @@ export default function Home() {
   const horLineRef = useRef(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   
-  const MainRef = useRef(null);
+  const MainRef = useRef<HTMLDivElement>();
   const skillMainRef = useRef<HTMLDivElement>();
-  const projectMainRef = useRef();
-  const contactMainRef = useRef();
-  const resMainRef = useRef();
+  const projectMainRef = useRef<HTMLDivElement>();
+  const contactMainRef = useRef<HTMLDivElement>();
+  const resMainRef = useRef<HTMLDivElement>();
 
   const [darkMode, setDarkMode] = useState(true);
 

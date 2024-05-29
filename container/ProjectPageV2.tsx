@@ -1,5 +1,5 @@
 "use client"
-import React,{ useRef,useEffect,useState,useLayoutEffect,forwardRef } from 'react';
+import React,{ useRef,useEffect,useState,useLayoutEffect,forwardRef, ForwardedRef } from 'react';
 import {gsap} from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -12,7 +12,7 @@ import { TbWorld } from "react-icons/tb";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 
-const ProjectPageV2 = forwardRef((props, ref) =>{
+const ProjectPageV2 = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) =>{
     
 
     const containerRef = useRef(null);
@@ -101,7 +101,7 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
         },
     ];
 
-    const projectRefs = projects.map(() => React.createRef());
+    const projectRefs = projects.map(() => React.createRef<HTMLDivElement>());
 
     const [zOrders, setZOrders] = useState(projects.map((_, i) => i));
 
@@ -131,14 +131,14 @@ const ProjectPageV2 = forwardRef((props, ref) =>{
         });
     };
     useLayoutEffect(() => {
-        if(ref.current != null) {
+        if('current' in ref && ref.current) {
             gsap.to(ref.current, {
                 backgroundPosition: '200% 0',
                 repeat: -1,
                 duration: 10,
               });    
         }
-        if (window.innerWidth > 1280 ) {
+        if (window.innerWidth > 1280 && 'current' in ref && ref.current ) {
             gsap.to(window, {
               scrollTrigger: {
                 trigger: ref.current, // ID of the container that triggers the scroll

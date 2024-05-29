@@ -1,10 +1,10 @@
 "use client"
 
-import React,{ useRef,useEffect,useState,forwardRef,useLayoutEffect } from 'react';
+import React,{ useRef,useEffect,useState,forwardRef,useLayoutEffect, ForwardedRef } from 'react';
 import {gsap} from 'gsap';
 import Image from 'next/image';
 
-const ResumePage = forwardRef((props, ref) => {
+const ResumePage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
 
     const btm3Ref = useRef(null);
 
@@ -12,13 +12,14 @@ const ResumePage = forwardRef((props, ref) => {
     const [copyText, setCopyText] = useState("Copy Link");
  
     useLayoutEffect(() => {
+      if('current' in ref && ref.current){
         gsap.to(ref.current, {
-            backgroundPosition: '-200% 0',
-            repeat: -1,
-            duration: 10,
-          });
-
-          if (window.innerWidth > 1280 ) {
+          backgroundPosition: '-200% 0',
+          repeat: -1,
+          duration: 10,
+        });
+      }
+          if (window.innerWidth > 1280 && 'current' in ref && ref.current ) {
             gsap.to(window, {
               scrollTrigger: {
                 trigger: ref.current, // ID of the container that triggers the scroll

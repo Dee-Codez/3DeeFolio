@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 type LandingPageProps = {
   darkMode: boolean;
 };
-const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<any>) => {
+const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<HTMLDivElement>) => {
 
   const scrollTrigger = useRef(null);
 
@@ -52,12 +52,14 @@ const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<a
   }, [set]);
 
   useLayoutEffect(() => {
-        gsap.to(ref.current, {
-          backgroundPosition: '200% 0',
-          repeat: -1,
-          duration: 10,
-        });
-    
+    if ('current' in ref && ref.current) {
+      gsap.to(ref.current, {
+        backgroundPosition: '200% 0',
+        repeat: -1,
+        duration: 10,
+      });
+    }
+
         gsap.fromTo(fadeInRef.current, {
             opacity: 0,
           }, {
@@ -111,7 +113,7 @@ const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<a
             }
           });
 
-          if (window.innerWidth > 1280 ) {
+          if (window.innerWidth > 1280 && 'current' in ref && ref.current ) {
             gsap.to(window, {
               scrollTrigger: {
                 trigger: ref.current, // ID of the container that triggers the scroll
