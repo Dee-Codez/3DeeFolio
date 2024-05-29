@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Hero } from "@/container/Hero";
 import dynamic from 'next/dynamic';
 import AnimatedCursor from "react-animated-cursor"
-import {useState, useRef,useEffect,useLayoutEffect,lazy,Suspense } from "react";
+import {useState, useRef,useEffect,useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CiMenuKebab } from "react-icons/ci";

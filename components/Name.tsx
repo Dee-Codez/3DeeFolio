@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, Suspense } from 'react';
+import { useState, useRef } from 'react';
 import { Text3D } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { a as threeA, useSpring, config } from '@react-spring/three';
@@ -18,7 +18,7 @@ const Letter = ({darktheme, letter, index, letters }) => {
   });
   const rotation = animatedRotation as unknown as [number, number, number];
 
-  
+
   const hoverTimeout = useRef(null);
 
   const handlePointerOver = (i) => {
