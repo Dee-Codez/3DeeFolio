@@ -24,10 +24,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
 
-  const ModelViewer = dynamic(
-    () => import('@/container/ModelVeiwer'),
-    { ssr: false }
-  );
+  // const ModelViewer = dynamic(
+  //   () => import('@/container/ModelVeiwer'),
+  //   { ssr: false }
+  // );
 
   // const LandingPage = lazy(() => import('@/container/LandingPage').then((mod) => ({ default: mod.LandingPage })));
 
