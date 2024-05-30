@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Hero } from "@/container/Hero";
 import dynamic from 'next/dynamic';
 import AnimatedCursor from "react-animated-cursor"
-import {useState, useRef,useEffect,useLayoutEffect } from "react";
+import {useState, useRef,useEffect,useLayoutEffect,Suspense} from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CiMenuKebab } from "react-icons/ci";
@@ -19,6 +19,7 @@ import { ProjectPageV2 } from "@/container/ProjectPageV2";
 import { ResumePage } from "@/container/ResumePage";
 import { ContactPage } from "@/container/ContactPage";
 import Link from "next/link";
+import { LoadingTyper } from "@/components/LoadingTyper";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,6 +34,7 @@ export default function Home() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [currPage, setCurrPage] = useState(0);
+  const [animationsReady, setAnimationsReady] = useState(false);
 
   const sliderRef = useRef(null);
   const horLineRef = useRef(null);
@@ -200,6 +202,8 @@ export default function Home() {
       },
     });
 
+    setAnimationsReady(true);
+
     return () => {
       if (timeoutId.current) {
         clearTimeout(timeoutId.current);
@@ -230,6 +234,20 @@ export default function Home() {
     setDarkMode(savedTheme === 'dark');
   }, []);
 
+  if (!animationsReady) {
+    return (
+      <div className="w-[100vw] h-[100vh]">
+            <div className="flex justify-center items-center h-full">
+                <div className="text-center">
+                    {/* <h1 className="text-5xl font-bold text-gray-300 dark:text-gray-100">Loading...</h1> */}
+                    <Suspense fallback={<h1 className="text-5xl font-bold text-gray-300 dark:text-gray-100">Loading...</h1>}>
+                      <LoadingTyper/>
+                    </Suspense>
+                </div>
+            </div>
+        </div>
+    );
+  }
   return (
     <main className={`flex flex-col text-black items-center ${darkMode ? 'dark text-white' : ''}`}>
       <div ref={sliderRef} className="w-full fixed top-0 z-50">
