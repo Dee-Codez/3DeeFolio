@@ -13,7 +13,7 @@ const Letter = ({darktheme, letter, index, letters }) => {
   const [rotationAxis, setRotationAxis] = useState([0, 0, 1]); // default rotation axis is z-axis
 
   const { rotation: animatedRotation } = useSpring({
-    rotation: hovered === index ? rotationAxis.map(axis => axis * Math.PI / 2) : [0, 0, 0],
+    rotation: hovered === index ? rotationAxis.map(axis => axis * 2 * Math.PI) : [0, 0, 0],
     config: config.slow,
   });
   const rotation = animatedRotation as unknown as [number, number, number];
@@ -24,8 +24,14 @@ const Letter = ({darktheme, letter, index, letters }) => {
   const handlePointerOver = (i) => {
     hoverTimeout.current = setTimeout(() => {
       setHovered(i);
-      setRotationAxis([Math.random(), Math.random(), Math.random()]); // set a random rotation axis
-    }, 80); // delay of 200ms
+  
+      // Choose a random axis
+      const axis = Math.floor(Math.random() * 3);
+      // Create a unit vector along the chosen axis
+      const rotationAxis = [0, 0, 0];
+      rotationAxis[axis] = 1;
+      setRotationAxis(rotationAxis);
+    }, 80);
   };
 
   const handlePointerOut = () => {
