@@ -8,6 +8,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import Link from 'next/link';
 import { Name } from '@/components/Name';
+import Image from 'next/image';
+import { PhotoSphere } from '@/components/PhotoSphere';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 type LandingPageProps = {
@@ -129,11 +131,19 @@ const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<H
 
   return (
     <div ref={ref} style={{  backgroundSize: '200% 100%' }} className="flex w-full bg-cover bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 relative flex-col min-h-[100vh] items-center justify-center">
-      <animated.div  ref={divRef} className="p-10  my-20 w-[90vw] text-center lg:text-left lg:w-[60vw] rounded-2xl font-neo bg-black/5 dark:bg-white/5 shadow-xl" style={{ boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(50px)', transform: xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) }}>
+      <animated.div  ref={divRef} className="p-10  my-20 w-[90vw] text-center lg:text-left lg:w-[60vw] rounded-2xl font-neo bg-black/5 dark:bg-white/5 shadow-xl relative" style={{ boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(50px)', transform: xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) }}>
+        <div className='absolute right-5 top-5 z-50'>
+          <PhotoSphere/>
+        </div>
         <div ref={fadeInRef} id='fadeIn' className="opacity-0 flex flex-col gap-10">
           <p className="text-7xl font-neo ">Hello There</p>
           <div  className="flex flex-col xl:flex-row items-center gap-1">
-            <Name dark={darkMode}/>
+            <div className='relative w-fit'>
+              <Name dark={darkMode}/>
+              {darkMode ? <Image src="/hover_white.png" width={300} height={300} alt="3D" className='absolute animate-pulse hidden xl:inline-block top-24 -right-40' />
+              : <Image src="/hover.png" width={300} height={300} alt="3D" className='absolute animate-pulse hidden xl:inline-block top-24 -right-40' />
+            }
+            </div>
             <p id='scrollTrig' className="text-5xl">This Side</p>
           </div>
           <p className="mt-10 text-3xl font-neo">Your go-to guy for all WebDev, Backend, ML, Ops Needs</p>
