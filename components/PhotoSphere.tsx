@@ -18,10 +18,10 @@ function PhotoSphere() {
 
     if (window.innerWidth > 1600) {
         // For large screens
-        renderer.setSize(window.innerWidth * 0.3, window.innerHeight * 0.35);
+        renderer.setSize(window.innerWidth * 0.3, window.innerHeight * 0.4);
       } else {
         // For small screens
-        renderer.setSize(window.innerWidth * 0.2, window.innerHeight * 0.35);
+        renderer.setSize(window.innerWidth * 0.2, window.innerHeight * 0.4);
       }    mount.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);

@@ -71,7 +71,7 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
   return (
     <div ref={ref} style={{ backgroundSize: '200% 100%'}} className="relative transition bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 w-full min-h-[100vh] font-neo">
         <div className="flex flex-col items-center mt-20 mb-28">
-            <h1 className="text-7xl">Contact Me</h1>
+            <h1 className="text-7xl text-center">Contact Me</h1>
             <div className='mt-20 flex items-center'>
                 <p className="text-2xl">My Socials : </p>
                 <Link href="https://www.linkedin.com/in/debampati/" target='_blank'><ModernImage txtcn='text-md' src="/icons/linkedin.png" width={70} height={70} alt='LinkedIn' /></Link>

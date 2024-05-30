@@ -264,11 +264,11 @@ export default function Home() {
         </div>
       </div>
       <div 
-        className="fixed bottom-32 right-16 w-[50vw] xl:w-[12vw] rounded-lg bg-black/10 dark:bg-white/10 shadow-xl shadow-black/20 backdrop-blur-xl transition-all duration-300 ease-in-out"
-        style={{ transform: menuOpen ? 'translateY(0)' : 'translateY(100%)', opacity: menuOpen ? 1 : 0}}
+        className="fixed z-40 bottom-32 right-10 xl:right-16 w-[50vw] xl:w-[12vw] rounded-lg bg-black/10 dark:bg-white/10 shadow-xl shadow-black/20 backdrop-blur-xl transition-all duration-300 ease-in-out"
+        style={{ transform: menuOpen ? 'translateY(0)' : 'translateY(150%)', opacity: menuOpen ? 1 : 0}}
       >
-        <div className="flex items-center justify-between mx-2">
-            <div className="flex gap-3">
+        <div className="flex items-center justify-between mx-1 xl:mx-2">
+            <div className="flex gap-1 xl:gap-3">
                 <Link href="https://github.com/Dee-Codez" target='_blank'>
                   {darkMode ? (
                     <Image src="/icons/github-white.svg" width={20} height={20}  alt="3DeeFolio"/>

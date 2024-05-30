@@ -66,7 +66,7 @@ const AboutPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
           </div>
           <div className='flex w-[80%] mt-20'>
             <div className='flex flex-col gap-10 mx-[10%] text-center xl:text-left'>
-                <div className='flex items-center gap-4'>
+                <div className='flex items-center justify-center xl:justify-start flex-wrap gap-4'>
                   <p className='text-3xl font-bold'>Public Profiles : </p>
                   <Link href="https://github.com/Dee-Codez" target='_blank'><ModernImage src='/icons/github.png' alt="Github" txtcn='text-md' width={50} height={50} /></Link>
                   <Link href="https://www.codechef.com/users/debspats" target='_blank'><ModernImage src='/icons/codechef.webp' alt="CodeChef" txtcn='text-sm text-black' width={43} height={43} /></Link>

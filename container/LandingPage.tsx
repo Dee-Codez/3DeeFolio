@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, forwardRef,useLayoutEffect } from 'react';
+import { useEffect, useRef, forwardRef,useLayoutEffect,Suspense } from 'react';
 import { gsap } from 'gsap';
 import { useSpring, animated } from 'react-spring';
 import { FaAngleDoubleDown } from "react-icons/fa";
@@ -131,10 +131,19 @@ const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<H
 
   return (
     <div ref={ref} style={{  backgroundSize: '200% 100%' }} className="flex w-full bg-cover bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 relative flex-col min-h-[100vh] items-center justify-center">
-      <animated.div  ref={divRef} className="p-10  my-20 w-[90vw] text-center lg:text-left lg:w-[60vw] rounded-2xl font-neo bg-black/5 dark:bg-white/5 shadow-xl relative" style={{ boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', backdropFilter: 'blur(50px)', transform: xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) }}>
+      <animated.div  
+        ref={divRef} 
+        className="p-10  my-20 w-[90vw] text-center lg:text-left lg:w-[60vw] rounded-2xl font-neo bg-black/5 dark:bg-white/5 shadow-xl relative" 
+        style={{ 
+          boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', 
+          backdropFilter: 'blur(50px)', 
+          transform: typeof window !== 'undefined' && window.innerWidth > 1280 ? xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) : 'none' 
+        }}
+      >
         <div className='absolute right-5 top-5 z-30 hidden xl:inline-block'>
-          
-          <PhotoSphere/>
+          <Suspense fallback={<div>Loading...</div>}>
+            <PhotoSphere/>
+          </Suspense>
           {/* <div className='absolute -bottom-5 -left-40 z-30 '>
             {darkMode ? <Image src="/drag.png" width={300} height={300} alt="3D" className='animate-pulse' /> : 
             <Image src="/drag_dark.png" width={300} height={300} alt="3D" className='animate-pulse' />}
