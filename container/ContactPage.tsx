@@ -6,6 +6,9 @@ import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ModernImage } from '@/components/ModernImage';
+import emailjs from 'emailjs-com';
+
+emailjs.init("1ZmbtZd56YrZTvTwf");
 
 const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
 
@@ -13,6 +16,8 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
     const lnameRef = useRef(null);
     const mailRef = useRef(null);
     const messageRef = useRef(null);
+
+    const successRef = useRef(null);
 
     const errRef = useRef(null);
 
@@ -30,6 +35,7 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
         const lname = lnameRef.current.value;
         const mail = mailRef.current.value;
         const message = messageRef.current.value;
+
         if (fname === '' || mail === '' || message === '') {
             setIsError(true);
             errRef.current.textContent = 'Please Fill the Required(*) Fields';
@@ -44,12 +50,26 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
             }, 3000);
         }else{
             setIsSubmitted(true);
-            console.log(fname,lname,mail,message);
-            setTimeout(() => {
-                setIsSubmitted(false);
-            }, 3000);
+            emailjs.send("service_pu7o97p","template_mo642f4",{
+                to_name: fname,
+                message: message,
+                to_mail: mail,
+            }).then((res) => {
+                successRef.current.textContent = 'Mail Sent Succesfully!!';
+                emailjs.send("service_pu7o97p","template_faybrs6",{
+                    f_name: fname,
+                    l_name: lname,
+                    from_mail: mail,
+                    message: message,
+                }).then((res) => {
+                    setIsSubmitted(false);
+                },(err) => {
+                    setIsSubmitted(false);
+                });
+            },(err) => {
+                successRef.current.textContent = 'Mail Not Sent!!';
+            });
         }
-        
     }
 
     const autoResize = (e) => {
@@ -112,7 +132,7 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
             ):(
                 <>
                 <div className='h-[20vh] mt-40 w-[90vw] xl:w-[40vw]  flex items-center justify-center text-2xl  '>
-                    <p className='bg-white/10 py-6 px-10 rounded'>Information Sent Succesfully!!</p>
+                    <p ref={successRef} className='bg-white/10 py-6 px-10 rounded'>Information Sent Succesfully!!</p>
                 </div>
                 </>
             )}
