@@ -119,7 +119,7 @@ const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<H
             gsap.to(window, {
               scrollTrigger: {
                 trigger: ref.current, // ID of the container that triggers the scroll
-                start: "bottom bottom-=200",
+                start: "bottom bottom-=300",
                 end: "bottom top",
                 onEnter: () =>{gsap.to(window, { scrollTo: containerRef.current, duration: 1})},
                 // onLeaveBack: () =>{gsap.to(window, { scrollTo: ref.current, duration: 1})},

@@ -24,8 +24,9 @@ function PhotoSphere() {
         renderer.setSize(window.innerWidth * 0.2, window.innerHeight * 0.4);
       }    mount.appendChild(renderer.domElement);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.update();
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableZoom = false;
+      controls.update();
 
     const textureLoader = new THREE.TextureLoader();
 
