@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react';
-import { Text3D } from '@react-three/drei';
+import { Text3D,Float} from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { a as threeA, useSpring, config } from '@react-spring/three';
 import { MeshNormalMaterial } from 'three';
@@ -47,10 +47,10 @@ const Letter = ({darktheme, letter, index, letters }) => {
       onPointerOut={handlePointerOut}
       rotation={rotation}
     >
-      <Text3D size={3} font="/helvetiker_bold.typeface.json">
-        {letter}
-        {darktheme ? (<meshNormalMaterial attach="material"/>) : (<meshBasicMaterial attach="material" color="#383b40" />)}
-      </Text3D>
+          <Text3D size={3}  font="/helvetiker_bold.typeface.json" bevelEnabled bevelThickness={0.1}>
+            {letter}
+            {darktheme ? (<meshNormalMaterial attach="material"/>) : (<meshBasicMaterial attach="material" color="#383b40" />)}
+          </Text3D>
     </threeA.mesh>
   );
 };
@@ -59,11 +59,13 @@ function Name({dark}) {
   const letters = "Debam".split('');  
 
   return (
-    <div style={{ width: 'fit-content', height: 'fit-content' }}>
+    <div>
     <Canvas>
-      {letters.map((letter, i) => (
-        <Letter darktheme={dark} key={i} letter={letter} index={i} letters={letters} />
-      ))}
+        <Float floatingRange={[0,0]} rotationIntensity={0.3} speed={2}>
+        {letters.map((letter, i) => (
+            <Letter darktheme={dark} key={i} letter={letter} index={i} letters={letters} />
+          ))}
+        </Float>
     </Canvas>
   </div>
   );

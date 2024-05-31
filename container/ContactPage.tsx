@@ -92,13 +92,15 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
     <div ref={ref} style={{ backgroundSize: '200% 100%'}} className="relative transition bg-gradient-to-r dark:from-[#00032a] from-slate-200 dark:via-[#00043f] via-slate-400 dark:to-[#00032a] to-slate-200 w-full min-h-[100vh] font-neo">
         <div className="flex flex-col items-center mt-20 mb-28">
             <h1 className="text-7xl text-center">Contact Me</h1>
-            <div className='mt-20 flex items-center'>
-                <p className="text-2xl">My Socials : </p>
+            <div className='mt-20 gap-5 flex flex-wrap items-center justify-center'>
+                <div><p className="text-2xl">My Socials : </p></div>
+                <div className='flex flex-wrap justify-center'>
                 <Link href="https://www.linkedin.com/in/debampati/" target='_blank'><ModernImage txtcn='text-md' src="/icons/linkedin.png" width={70} height={70} alt='LinkedIn' /></Link>
-                <Link href="https://www.instagram.com/___debs____/" target='_blank'><ModernImage txtcn='text-md' src="/icons/ig.webp" width={70} height={70} alt='Instagram' /></Link>
+                <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=debampati44@gmail.com" target='_blank'><ModernImage txtcn='text-md' src="/icons/gmail.png" width={70} height={70} alt='Mail' /></Link>
                 <Link href="https://wa.me/919454315004" target='_blank'><ModernImage txtcn='text-md' src="/icons/whatsapp.webp" width={70} height={70} alt='Whatsapp' /></Link>
-
-            </div>
+                <Link href="https://www.instagram.com/___debs____/" target='_blank'><ModernImage txtcn='text-md' src="/icons/ig.webp" width={70} height={70} alt='Instagram' /></Link>
+                </div>
+                 </div>
             {!isSubmitted ? (
                 <>
                     <form className='flex flex-col gap-8 mt-20 py-6 px-10 w-[90vw] xl:w-[40vw] bg-black/10 dark:bg-white/10 text-xl rounded-xl '>

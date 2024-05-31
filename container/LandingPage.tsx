@@ -10,6 +10,8 @@ import Link from 'next/link';
 import { Name } from '@/components/Name';
 import Image from 'next/image';
 import { PhotoSphere } from '@/components/PhotoSphere';
+import { ThreeDText } from '@/components/ThreeDText';
+import { Canvas } from '@react-three/fiber';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 type LandingPageProps = {
@@ -151,6 +153,15 @@ const LandingPage = forwardRef(({ darkMode,handleNav }: LandingPageProps, ref: R
             {darkMode ? <Image src="/drag.png" width={300} height={300} alt="3D" className='animate-pulse' /> : 
             <Image src="/drag_dark.png" width={300} height={300} alt="3D" className='animate-pulse' />}
           </div> */}
+        </div>
+        <div className='absolute -right-5 -top-5 z-20'>
+        {typeof window !== 'undefined' && window.innerWidth > 1280 && (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Canvas>
+              <ThreeDText text={"</>"}/>
+            </Canvas>
+          </Suspense>
+        )}
         </div>
         
         <div ref={fadeInRef} id='fadeIn' className="opacity-0 flex flex-col gap-10">
