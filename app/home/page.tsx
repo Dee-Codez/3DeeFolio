@@ -261,23 +261,26 @@ export default function Home() {
         <div id="horLine" ref={horLineRef} className="h-[6px] bg-black/20 dark:bg-white/20 w-fit"></div>
         <p id="followText" ref={textRef} className="relative mt-3 opacity-0 p-2 bg-black/20 dark:bg-white/20 w-fit rounded-full backdrop-blur-xl font-neo font-extrabold">Landing Page</p>
       </div>
-      <AnimatedCursor
-        color="255, 255, 255"
-        innerSize={10}
-        outerSize={40}
-        outerScale={2.5}
-        innerScale={2}
-        outerStyle={{
-          mixBlendMode: 'soft-light',
-        }}
-        clickables={[
-          'button',
-          'a',
-          'input',
-          'textarea',
-          '.clickable',
-        ]}
-      />
+      {typeof window !== 'undefined' && window.innerWidth > 1280 && (
+        <AnimatedCursor
+          color="255, 255, 255"
+          innerSize={10}
+          outerSize={40}
+          outerScale={2.5}
+          innerScale={2}
+          outerStyle={{
+            mixBlendMode: 'soft-light',
+          }}
+          clickables={[
+            'button',
+            'a',
+            'input',
+            'textarea',
+            '.clickable',
+          ]}
+        />
+      )}
+      
         <LandingPage ref={MainRef} darkMode={darkMode} />
       <AboutPage ref={skillMainRef} />
       <ProjectPageV2 ref={projectMainRef}/>

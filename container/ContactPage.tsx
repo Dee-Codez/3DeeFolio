@@ -55,7 +55,7 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
                 message: message,
                 to_mail: mail,
             }).then((res) => {
-                successRef.current.textContent = 'Mail Sent Succesfully!!';
+                successRef.current.textContent = 'Mailed Both Parties';
                 emailjs.send("service_pu7o97p","template_faybrs6",{
                     f_name: fname,
                     l_name: lname,
@@ -105,20 +105,20 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
                     <p ref={errRef} className={`bg-red-500 p-1 pl-2 font-bold ${isError?`inline`:`hidden`}`}>t</p>
                     <div className='flex flex-col xl:flex-row gap-5 w-full justify-between '>
                         <div className='flex flex-col gap-3'>
-                            <label htmlFor="name">First Name * </label>
+                            <label htmlFor="name" className='cursor-none'>First Name * </label>
                             <input ref={fnameRef} type="text" id="fname" name="fname" className='w-fit bg-black/20 dark:bg-white/20 rounded h-8  font-aliensub px-2' />
                         </div>
                         <div className='flex flex-col gap-3'>
-                            <label htmlFor="name">Last Name </label>
+                            <label htmlFor="name" className='cursor-none'>Last Name </label>
                             <input ref={lnameRef} type="text" id="lname" name="lname" className='w-fit bg-black/20 dark:bg-white/20 rounded h-8  font-aliensub px-2' />
                         </div>
                     </div>
                     <div className='flex flex-col gap-3'>
-                        <label htmlFor="name">Email ID * </label>
+                        <label htmlFor="name" className='cursor-none'>Email ID * </label>
                         <input ref={mailRef} type="text" id="mail" name="mail" className=' bg-black/20 dark:bg-white/20 rounded h-8 font-aliensub px-2' />
                     </div>
                     <div className='flex flex-col gap-3'>
-                        <label htmlFor="name">How Can I Help you ? *</label>
+                        <label htmlFor="name" className='cursor-none'>How Can I Help you ? *</label>
                         <textarea onInput={autoResize} ref={messageRef} id="mail" name="mail" className=' bg-black/20 dark:bg-white/20 rounded font-aliensub px-2' />
                     </div>
                     <div className='flex justify-center'>
