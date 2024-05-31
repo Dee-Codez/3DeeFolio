@@ -140,10 +140,12 @@ const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<H
           transform: typeof window !== 'undefined' && window.innerWidth > 1280 ? xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) : 'none' 
         }}
       >
-        <div className='absolute right-5 top-5 z-30 hidden xl:inline-block'>
+        <div className='absolute right-5 top-5 z-30 '>
+        {typeof window !== 'undefined' && window.innerWidth > 1280 && (
           <Suspense fallback={<div>Loading...</div>}>
             <PhotoSphere/>
           </Suspense>
+        )}
           {/* <div className='absolute -bottom-5 -left-40 z-30 '>
             {darkMode ? <Image src="/drag.png" width={300} height={300} alt="3D" className='animate-pulse' /> : 
             <Image src="/drag_dark.png" width={300} height={300} alt="3D" className='animate-pulse' />}
