@@ -53,11 +53,11 @@ function PhotoSphere() {
     camera.position.z = 500; // Adjust the camera position as needed
 
     let isRotating = true; // Add this line before the animate function
-    document.addEventListener('mousedown', () => {
+    mountRef.current.addEventListener('mousedown', () => {
     isRotating = false;
     });
 
-    document.addEventListener('mouseup', () => {
+    mountRef.current.addEventListener('mouseup', () => {
     isRotating = true;
     });
 
