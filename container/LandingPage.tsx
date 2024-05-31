@@ -14,8 +14,9 @@ import { PhotoSphere } from '@/components/PhotoSphere';
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 type LandingPageProps = {
   darkMode: boolean;
+  handleNav: Function;
 };
-const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<HTMLDivElement>) => {
+const LandingPage = forwardRef(({ darkMode,handleNav }: LandingPageProps, ref: React.Ref<HTMLDivElement>) => {
 
   const scrollTrigger = useRef(null);
 
@@ -165,7 +166,7 @@ const LandingPage = forwardRef(({ darkMode }: LandingPageProps, ref: React.Ref<H
           </div>
           <p className="mt-10 text-3xl font-neo">Your go-to guy for all WebDev, Backend, ML, Ops Needs</p>
           <p className="text-3xl font-neo">I am natively from Varanasi, Uttar Pradesh and currently a Pre-Final Year Undergrad at SRMIST, Chennai.</p>
-          <p className="text-3xl font-neo">PS: Actively looking out for experience so do <span className='underline'><Link href={"https://mail.google.com/mail/?view=cm&fs=1&to=debampati44@gmail.com"} target='_blank'>contact</Link></span>  me if deemed worthy :).</p>
+          <p className="text-3xl font-neo ">PS: Actively looking out for experience so do <span className='underline clickable' onClick={()=>{handleNav(4)}}>contact</span> me if deemed worthy :).</p>
         </div>
       </animated.div>
         <div ref={doubleDownRef} id='down' className='xl:absolute  xl:bottom-10 font-neo animate-bounce'>

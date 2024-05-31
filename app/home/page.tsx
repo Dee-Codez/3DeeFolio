@@ -281,7 +281,7 @@ export default function Home() {
         />
       )}
       
-        <LandingPage ref={MainRef} darkMode={darkMode} />
+        <LandingPage ref={MainRef} darkMode={darkMode} handleNav={handleNav} />
       <AboutPage ref={skillMainRef} />
       <ProjectPageV2 ref={projectMainRef}/>
       <ResumePage ref={resMainRef}/>
