@@ -207,7 +207,7 @@ const ProjectPageV2 = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) =>{
                                                     setShowImgIndices([...showImgIndices, index]);
                                                 }
                                             }}
-                                            className={`bg-black/20 dark:bg-white/20 mt-5 p-2 rounded-md ${showImgIndices.includes(index) ? `hidden` : `scale-100`} hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition cursor-pointer`}>
+                                            className={`bg-black/20 dark:bg-white/20 mt-5 p-2 rounded-md ${showImgIndices.includes(index) ? `hidden` : `scale-100`} hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition clickable`}>
                                                 Show Preview
                                             </div>
                                                 {showImgIndices.includes(index) && (
@@ -221,7 +221,7 @@ const ProjectPageV2 = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) =>{
                                                             className='rounded-md'
                                                             />
                                                         </div>
-                                                        <div className='absolute transition cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  flex items-center justify-center opacity-0 group-hover:opacity-100' onClick={() => {
+                                                        <div className='absolute transition clickable top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  flex items-center justify-center opacity-0 group-hover:opacity-100' onClick={() => {
                                                         setShowImgIndices(showImgIndices.filter(i => i !== index));
                                                         }}>
                                                             <p className='bg-black/40 text-white text-center hover:bg-black/80 hover:scale-110 transition p-4 rounded-lg'>Hide Preview</p>

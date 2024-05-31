@@ -71,7 +71,7 @@ const ResumePage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
                           <p>{dwldText}</p>
                       </div>
                     </a>
-                        <div onClick={onCopy} className='cursor-pointer p-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition rounded-md w-fit'>
+                        <div onClick={onCopy} className='clickable p-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 hover:scale-105 transition rounded-md w-fit'>
                             <p>{copyText}</p>
                         </div>
                     </div>

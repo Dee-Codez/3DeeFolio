@@ -212,7 +212,14 @@ export default function Home() {
 
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
-    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
+    const body = document.body;
+    if (darkMode) {
+      body.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }    
     setDarkMode(newDarkMode);
   };
 
@@ -254,27 +261,34 @@ export default function Home() {
         <div id="horLine" ref={horLineRef} className="h-[6px] bg-black/20 dark:bg-white/20 w-fit"></div>
         <p id="followText" ref={textRef} className="relative mt-3 opacity-0 p-2 bg-black/20 dark:bg-white/20 w-fit rounded-full backdrop-blur-xl font-neo font-extrabold">Landing Page</p>
       </div>
-      {/* <AnimatedCursor
+      <AnimatedCursor
         color="255, 255, 255"
-        innerSize={16}
-        outerSize={60}
-        outerScale={3}
+        innerSize={10}
+        outerSize={40}
+        outerScale={2.5}
         innerScale={2}
         outerStyle={{
           mixBlendMode: 'soft-light',
         }}
-      /> */}
+        clickables={[
+          'button',
+          'a',
+          'input',
+          'textarea',
+          '.clickable',
+        ]}
+      />
         <LandingPage ref={MainRef} darkMode={darkMode} />
       <AboutPage ref={skillMainRef} />
       <ProjectPageV2 ref={projectMainRef}/>
       <ResumePage ref={resMainRef}/>
       <ContactPage ref={contactMainRef}/>
-      <div className="fixed bottom-5 right-5 xl:bottom-10 xl:right-10 group z-30 p-5 overflow-hidden rounded-full"> 
+      <div className="clickable fixed bottom-5 right-5 xl:bottom-10 xl:right-10 group z-30 p-5 overflow-hidden rounded-full"> 
         <div className="absolute z-10 rounded-full w-14 h-14 flex justify-center items-center ">
           <div className="h-[58px] w-4 animate-spin blur bg-sky-400"></div>
         </div>
         <div 
-          className="p-2 z-20 bg-sky-500 group-hover:animation-none cursor-pointer rounded-full relative"
+          className="p-2 z-20 bg-sky-500 group-hover:animation-none rounded-full relative"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? (<RxCross2  size={40} />) : (<CiMenuKebab size={40} />)}
@@ -304,7 +318,7 @@ export default function Home() {
                   }
                 </Link>
             </div>
-            <a href="/Debam Resume.pdf" download  className="m-2 bg-black/20 dark:bg-white/20 flex gap-2 p-2 rounded-md cursor-pointer dark:hover:bg-white/30 hover:bg-black/30 transition items-center ">
+            <a href="/Debam Resume.pdf" download  className="m-2 bg-black/20 dark:bg-white/20 flex gap-2 p-2 rounded-md dark:hover:bg-white/30 hover:bg-black/30 transition items-center ">
               <FaDownload />
               <p className="font-neo text-sm">Resume</p>
             </a>
@@ -325,14 +339,14 @@ export default function Home() {
         {pages.map((page, index) => (   
         <div 
           key={index}
-          className={`py-2 px-5 cursor-pointer flex w-full ${currPage === index ? 'text-sky-700 dark:text-cyan-400' : ''}`}
+          className={`py-2 px-5  flex w-full ${currPage === index ? 'text-sky-700 dark:text-cyan-400' : ''}`}
           onClick={() => handleNav(index)}
         >
           <div className="flex w-full items-center text-right ">
             {currPage === index && (
               <div className="h-3 w-3 bg-sky-600 dark:bg-cyan-400 rounded-full mr-2"></div>
             )}
-            <p className="text-right font-neo font-semibold text-xl w-full">{page}</p>  
+            <p className="text-right clickable font-neo font-semibold text-xl w-full">{page}</p>  
           </div>
         </div>
       ))}
