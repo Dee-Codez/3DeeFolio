@@ -35,6 +35,7 @@ export default function Home() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [currPage, setCurrPage] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
 
 
   const sliderRef = useRef(null);
@@ -238,6 +239,7 @@ export default function Home() {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     setDarkMode(savedTheme === 'dark');
+    setWindowWidth(window.innerWidth);
   }, []);
 
 
@@ -257,13 +259,9 @@ export default function Home() {
   // }
   return (
     <main className={`flex flex-col text-black items-center ${darkMode ? 'dark text-white' : ''}`}>
-      <div ref={sliderRef} className="w-full fixed top-0 z-50">
-        <div id="horLine" ref={horLineRef} className="h-[6px] bg-black/20 dark:bg-white/20 w-fit"></div>
-        <p id="followText" ref={textRef} className="relative mt-3 opacity-0 p-2 bg-black/20 dark:bg-white/20 w-fit rounded-full backdrop-blur-xl font-neo font-extrabold">Landing Page</p>
-      </div>
-      {typeof window !== 'undefined' && window.innerWidth > 1280 && (
+      {windowWidth > 1280 && (
         <AnimatedCursor
-          color="255, 255, 255"
+          color={darkMode ? '255, 255, 255' : '0, 0, 0' }
           innerSize={10}
           outerSize={40}
           outerScale={2.5}
@@ -280,8 +278,11 @@ export default function Home() {
           ]}
         />
       )}
-      
-        <LandingPage ref={MainRef} darkMode={darkMode} handleNav={handleNav} />
+      <div ref={sliderRef} className="w-full fixed top-0 z-50">
+        <div id="horLine" ref={horLineRef} className="h-[6px] bg-black/20 dark:bg-white/20 w-fit"></div>
+        <p id="followText" ref={textRef} className="relative mt-3 opacity-0 p-2 bg-black/20 dark:bg-white/20 w-fit rounded-full backdrop-blur-xl font-neo font-extrabold">Landing Page</p>
+      </div>
+      <LandingPage ref={MainRef} darkMode={darkMode} handleNav={handleNav} />
       <AboutPage ref={skillMainRef} />
       <ProjectPageV2 ref={projectMainRef}/>
       <ResumePage ref={resMainRef}/>
