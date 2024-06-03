@@ -21,23 +21,28 @@ const Letter = ({darktheme, letter, index, letters }) => {
 
   const hoverTimeout = useRef(null);
 
-  const handlePointerOver = (i) => {
-    hoverTimeout.current = setTimeout(() => {
-      setHovered(i);
-  
-      // Choose a random axis
-      const axis = Math.floor(Math.random() * 3);
-      // Create a unit vector along the chosen axis
-      const rotationAxis = [0, 0, 0];
-      rotationAxis[axis] = 1;
-      setRotationAxis(rotationAxis);
-    }, 80);
-  };
+  const unhoverTimeout = useRef(null);
 
-  const handlePointerOut = () => {
-    clearTimeout(hoverTimeout.current);
+const handlePointerOver = (i) => {
+  clearTimeout(unhoverTimeout.current);
+  hoverTimeout.current = setTimeout(() => {
+    setHovered(i);
+
+    // Choose a random axis
+    const axis = Math.floor(Math.random() * 3);
+    // Create a unit vector along the chosen axis
+    const rotationAxis = [0, 0, 0];
+    rotationAxis[axis] = 1;
+    setRotationAxis(rotationAxis);
+  }, 80);
+};
+
+const handlePointerOut = () => {
+  clearTimeout(hoverTimeout.current);
+  unhoverTimeout.current = setTimeout(() => {
     setHovered(null);
-  };
+  }, 322);
+};
 
   return (
     <threeA.mesh
