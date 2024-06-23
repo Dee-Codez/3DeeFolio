@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, forwardRef,useLayoutEffect,Suspense } from 'react';
+import {useState, useEffect, useRef, forwardRef,useLayoutEffect,Suspense } from 'react';
 import { gsap } from 'gsap';
 import { useSpring, animated } from 'react-spring';
 import { FaAngleDoubleDown } from "react-icons/fa";
@@ -55,6 +55,24 @@ const LandingPage = forwardRef(({ darkMode,handleNav }: LandingPageProps, ref: R
       window.removeEventListener('blur', resetAnimation);
     };
   }, [set]);
+
+  const [windowWidth, setWindowWidth] = useState(null);
+
+  useEffect(() => {
+    // Function to update the window width
+    const updateWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Update width on mount
+    updateWindowWidth();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', updateWindowWidth);
+
+    // Cleanup event listener on component unmount
+    return () => window.removeEventListener('resize', updateWindowWidth);
+  }, []);
 
   useLayoutEffect(() => {
     if ('current' in ref && ref.current) {
@@ -140,11 +158,11 @@ const LandingPage = forwardRef(({ darkMode,handleNav }: LandingPageProps, ref: R
         style={{ 
           boxShadow: '2px 2px 20px 1px rgba(0, 0, 0, 0.3)', 
           backdropFilter: 'blur(50px)', 
-          transform: typeof window !== 'undefined' && window.innerWidth > 1280 ? xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) : 'none' 
+          transform: windowWidth ? xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`) : 'none' 
         }}
       >
         <div className='absolute right-5 top-5 z-30 '>
-        {typeof window !== 'undefined' && window.innerWidth > 1280 && (
+        {windowWidth > 1280 && (
           <Suspense fallback={<div>Loading...</div>}>
             <PhotoSphere/>
           </Suspense>
@@ -155,7 +173,7 @@ const LandingPage = forwardRef(({ darkMode,handleNav }: LandingPageProps, ref: R
           </div> */}
         </div>
         <div className='absolute -right-5 -top-5 z-20'>
-        {typeof window !== 'undefined' && window.innerWidth > 1280 && (
+        {windowWidth > 1280 && (
           <Suspense fallback={<div>Loading...</div>}>
             <Canvas>
               <ThreeDText text={"</>"}/>

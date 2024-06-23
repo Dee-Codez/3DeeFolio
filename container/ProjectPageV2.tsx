@@ -33,6 +33,16 @@ const ProjectPageV2 = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) =>{
           }
       }, []);
 
+      const [windowWidth, setWindowWidth] = useState(null);
+
+      useEffect(() => {
+        const updateWindowWidth = () => {
+          setWindowWidth(window.innerWidth);
+        };
+        updateWindowWidth();
+        window.addEventListener('resize', updateWindowWidth);
+        return () => window.removeEventListener('resize', updateWindowWidth);
+      }, []);
 
     const projects = [
         {
@@ -107,7 +117,7 @@ const ProjectPageV2 = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) =>{
 
     const [positions, setPositions] = useState(() => {
         return projects.map((_, index) => {
-          if (typeof window !== 'undefined' && window.innerWidth > 1024) {
+          if (windowWidth > 1024) {
             return {
               x: 0, //x: index % 2 === 0 ? -200 : 200, For When flex-col alternate is needed
               y: 0,

@@ -21,6 +21,7 @@ import { ResumePage } from "@/container/ResumePage";
 import { ContactPage } from "@/container/ContactPage";
 import Link from "next/link";
 import { LoadingTyper } from "@/components/LoadingTyper";
+import { to } from "react-spring";
 
 gsap.registerPlugin(ScrollTrigger);
 

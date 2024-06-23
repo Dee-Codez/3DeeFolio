@@ -43,7 +43,7 @@ const ResumePage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
     const onCopy = async () => {
       try {
         setCopyText("Copied");
-        await navigator.clipboard.writeText('https://drive.google.com/file/d/1S5wAYC7FmqSGm1MzrwLGUyQdSGc4DdX0/view?usp=sharing');
+        await navigator.clipboard.writeText('https://drive.google.com/file/d/1XPpDizcwELV1VF_ACzq8Bl88-Xi1oqLf/view?usp=sharing');
         setTimeout(() => {
           setCopyText("Copy Link");
         }, 1000);
