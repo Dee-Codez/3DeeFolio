@@ -56,16 +56,6 @@ const ContactPage = forwardRef((props, ref:ForwardedRef<HTMLDivElement>) => {
                 to_mail: mail,
             }).then((res) => {
                 successRef.current.textContent = 'Mailed Both Parties';
-                emailjs.send("service_pu7o97p","template_faybrs6",{
-                    f_name: fname,
-                    l_name: lname,
-                    from_mail: mail,
-                    message: message,
-                }).then((res) => {
-                    setIsSubmitted(false);
-                },(err) => {
-                    setIsSubmitted(false);
-                });
             },(err) => {
                 successRef.current.textContent = 'Mail Not Sent!!';
             });
