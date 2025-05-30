@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { list } from "@vercel/blob";
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -8,11 +9,27 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const vCardContent = process.env.NEXT_PUBLIC_VCARD_CONTENT || "";
+    const fetchVCardFromBlob = async () => {
+      try {
+        const response = await fetch(process.env.NEXT_PUBLIC_BLOB_URL || "");
 
-    const parsedContacts = parseVCard(vCardContent);
-    setContacts(parsedContacts);
-    setFilteredContacts(parsedContacts);
+        if (!response.ok) {
+          throw new Error("Failed to fetch file content.");
+        }
+
+        const text = await response.text();
+
+        // Parse the vCard content immediately after fetching
+        const parsedContacts = parseVCard(text);
+        setContacts(parsedContacts);
+        setFilteredContacts(parsedContacts);
+      } catch (error) {
+        console.error("Error fetching vCard from Blob:", error);
+        alert("Failed to fetch vCard file.");
+      }
+    };
+
+    fetchVCardFromBlob();
   }, []);
 
   const parseVCard = (vCardText: string) => {
@@ -44,7 +61,6 @@ export default function Home() {
       });
 
       const photoData = photoLines.length > 0 ? photoLines.join("") : null;
-      console.log("Photo Data:", photoData);
 
       if (nameMatch || telMatch || emailMatch || photoData) {
         contacts.push({
@@ -85,7 +101,7 @@ export default function Home() {
       {/* Header */}
       <header className="bg-blue-600 text-white py-4 sticky top-0 z-10 shadow-md">
         <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-2xl font-bold text-center">Contact Manager</h1>
+          <h1 className="text-2xl font-bold text-center">Emergency Contacts</h1>
         </div>
       </header>
 
@@ -149,7 +165,7 @@ export default function Home() {
               ))}
             </ul>
           ) : (
-            <p className="text-center text-gray-600">No contacts found.</p>
+            <p className="text-center text-gray-600">Loading Contacts...</p>
           )}
         </div>
       </main>
